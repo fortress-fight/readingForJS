@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var book = {
+			"title": "a book",
+			"authors": [
+				"小米"
+			],
+			"edition": 4,
+			"year": 2011
+		}
+		/*var JSONText = JSON.stringify(book, null, 4)
+		console.log(JSONText);*/
+		/*
+		{
+		    "title": "a book",
+		    "authors": "小米",
+		    "edition": 4,
+		    "year": 2011
+		}
+		 */
+
+
+		 var JSONText = JSON.stringify(book, null, '--')
+		 console.log(JSONText)
+
+		 /*
+		 LearnForJSON1.html:30 {
+			--"title": "a book",
+			--"authors": [
+			----"小米"
+			--],
+			--"edition": 4,
+			--"year": 2011
+		}
+		  */
+	</script>
+</body>
+</html>
