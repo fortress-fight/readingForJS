@@ -187,3 +187,59 @@ JSON.stringify()的第三个参数，代表着缩进，可以为数字或者字�
 
 无论是否使用toJSON的方法，理解序列化的顺序都十分重要
 
+## 3. 解析选项
+
+JSON.parse() 同样也可以接受另一个参数--函数，叫做还原函数；
+还原函数和JSON.stringify()中的过滤函数使用方法相同，都是传入一个key和一个value，返回一个值；
+如果返回一个undefined就会从结果中删除这个属性，否则就将返回这插入结果中。
+在日期字符串转换成Date对象的时候就会用到还原函数；
+
+例如：
+
+```
+    <script>
+        var book = {
+            "title": "a book",
+            "authors": [
+                "小米"
+            ],
+            "edition": 4,
+            "year": 2011,
+            "date": new Date(2011, 11, 1)
+        }
+
+        var jsonText = JSON.stringify(book);
+        var json = JSON.parse(jsonText, function (key, value) {
+            if (key == "date") {
+                return new Date(value);
+            } else {
+                return value;
+            }
+        })
+        console.log(json.getFullYear())//2011 说明这里存放的是一个事件对象
+        console.log(json)
+        /*
+        ﻿
+LearnForJSON3.html:27 
+Object {title: "a book", authors: Array[1], edition: 4, year: 2011, date: Thu Dec 01 2011 00:00:00 GMT+0800 (中国标准时间)}
+authors
+:
+Array[1]
+date
+:
+Thu Dec 01 2011 00:00:00 GMT+0800 (中国标准时间)
+edition
+:
+4
+title
+:
+"a book"
+year
+:
+2011
+__proto__
+:
+Object
+         */
+    </script>
+```
