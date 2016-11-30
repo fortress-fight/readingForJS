@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var book = {
+			_year: 2001
+		};
+
+		// book
+
+		var a = Object.getOwnPropertyDescriptor(book, '_year')
+		console.log(a)
+		/*
+		learnOO_读取属性特性.html:16
+		Object {value: 2001, writable: true, enumerable: true, configurable: true}configurable: trueenumerable: truevalue: 2001writable: true__proto__: Object
+		 */
+
+		 Object.defineProperties(book, {
+		 	name: {
+		 		value: 'book',
+		 		writable: false,
+		 		configurable: false,
+		 		enumerable: false
+		 	},
+		 	color: {
+			 	get: function () {
+			 		return 1
+			 	},
+			 	set: function(value){
+			 		this._year = value+'year'
+			 	}
+		 	}
+		 })
+
+		 alert(book.color) // 1
+		 book.color = 2;
+		 alert(book._year) // 2year
+
+		 var b = Object.getOwnPropertyDescriptor(book, 'name');
+		 console.log(b)
+		 /*
+		 Object {value: "book", writable: false, enumerable: false, configurable: false}
+		  */
+		 
+		 var  c = Object.getOwnPropertyDescriptor(book, 'color');
+		 console.log(c)
+		 /*
+		 Object {enumerable: false, configurable: false}configurable: falseenumerable: falseget: ()set: (value)__proto__: Object
+		  */
+	</script>
+</body>
+</html>

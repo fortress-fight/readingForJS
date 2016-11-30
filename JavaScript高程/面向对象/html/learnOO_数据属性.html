@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*[[Value]]*/
+		var person = {
+			name: "Jack"
+		}
+		/* 这里的创建了一个name的属性，属性值被设置成Jack，对属性值的任何修改，都将反映到该位置上 */
+
+
+		/*[[Writable]]*/
+
+/*		var person = {};
+		Object.defineProperty(person, 'name', {
+			writable: false,
+			value: 'Jack'
+		});
+
+		alert(person.name); // Jack
+		// person.name = 'P';
+
+		delete person.name;
+
+		alert(person.name); // Jack
+*/
+
+
+		/*[[Configurable]]*/
+
+/*		var person = {};
+
+		Object.defineProperty(person, 'name', {
+			value: 'Jack',
+			configurable: false
+		});
+
+		alert(person.name) // Jack
+
+		person.name = 'b';
+		delete person.name;
+
+		alert(person.name) // Jack
+
+		Object.defineProperty(person, 'name', {
+			configurable: true
+		})*/
+
+		var person = {
+			name: "Jack"
+		}
+
+		Object.defineProperty(person, 'name', {
+			value: 'v'
+		})
+
+		person.name = 'b';
+
+		alert(person.name)
+
+	</script>
+</body>
+</html>

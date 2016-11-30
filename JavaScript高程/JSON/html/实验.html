@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var book = {
+			"title": "a book",
+			"authors": [
+				"小米"
+			],
+			"edition": 4,
+			"year": 2011,
+			"date": new Date(2011, 11, 1)
+		}
+
+		var jsonText = JSON.stringify(book);
+		var json = JSON.parse(jsonText, function (key, value) {
+			if (key == "date") {
+				return new Date(value);
+			} else {
+				return value;
+			}
+		})
+		console.log(json.getFullYear())//2011 说明这里存放的是一个事件对象
+		console.log(json)
+		/*
+		﻿
+LearnForJSON3.html:27 
+Object {title: "a book", authors: Array[1], edition: 4, year: 2011, date: Thu Dec 01 2011 00:00:00 GMT+0800 (中国标准时间)}
+authors
+:
+Array[1]
+date
+:
+Thu Dec 01 2011 00:00:00 GMT+0800 (中国标准时间)
+edition
+:
+4
+title
+:
+"a book"
+year
+:
+2011
+__proto__
+:
+Object
+		 */
+	</script>
+</body>
+</html>
