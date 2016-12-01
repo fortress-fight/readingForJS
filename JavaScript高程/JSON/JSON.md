@@ -67,6 +67,7 @@ JSON.parse(string),将一个string转换成JSON对象，
 ```
 
 如果这个参数是一个函数的时候，函数中会传入两个参数一个key 和 value, 可以对其操作并返回,返回值将替换转后的value值 如果返回的是个undefined那么就会忽略掉这个属性;
+
 例：
 
 ```
@@ -78,13 +79,27 @@ JSON.parse(string),将一个string转换成JSON对象，
                 case 'edition':
                     return undefined;
                 default:
-                    return value;
+                    return value; 
                     break;
             }
         })
 
     console.log(JSONText) //{"title":"这是一个标题","authors":"小米","year":2011}
 ```
+
+!!!注意：
+最后的default 必须要有，要保证每一个值都有返回值，如果需要删除就返回 undefined , 实际上 第一个传入的key是空字符串，其value就是book，如果不让他返回就会使undefined
+
+证明：
+```
+     var jsonText = JSON.stringify(book, function (key, value) {
+        if (key == '') {
+            return value;
+        }
+    });
+     console.log(jsonText) // {}
+```
+
 
 
 2. 缩进：
@@ -124,7 +139,8 @@ JSON.stringify()的第三个参数，代表着缩进，可以为数字或者字�
      console.log(JSONText)
 
      /*
-     LearnForJSON1.html:30 {
+     LearnForJSON1.html
+     {
         --"title": "a book",
         --"authors": [
         ----"小米"
@@ -219,27 +235,16 @@ JSON.parse() 同样也可以接受另一个参数--函数，叫做还原函数�
         console.log(json.getFullYear())//2011 说明这里存放的是一个事件对象
         console.log(json)
         /*
+LearnForJSON3.html
         ﻿
-LearnForJSON3.html:27 
 Object {title: "a book", authors: Array[1], edition: 4, year: 2011, date: Thu Dec 01 2011 00:00:00 GMT+0800 (中国标准时间)}
-authors
-:
-Array[1]
-date
-:
-Thu Dec 01 2011 00:00:00 GMT+0800 (中国标准时间)
-edition
-:
-4
-title
-:
-"a book"
-year
-:
-2011
-__proto__
-:
-Object
+authors:Array[1]
+date:Thu Dec 01 2011 00:00:00 GMT+0800 (中国标准时间)
+edition:4
+title:"a book"
+year:2011
+__proto__:Object
          */
     </script>
 ```
+

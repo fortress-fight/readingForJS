@@ -1,6 +1,6 @@
 # 面向对象的程序设计（JavaScript高程三）
 
-## 1. 理解对象 
+## 1. 理解对象
 
 <!-- 这里的内容比较枯燥，但是对于理解对象十分有利，那就耐着性子读下去吧 -->
 
@@ -273,7 +273,7 @@ Object.getOwnPropertyDescriptor()
          /*
          Object {value: "book", writable: false, enumerable: false, configurable: false}
           */
-         
+
          var  c = Object.getOwnPropertyDescriptor(book, 'color');
          console.log(c)
          /*
@@ -281,3 +281,220 @@ Object.getOwnPropertyDescriptor()
           */
     </script>
 ```
+
+## 2. 创建对象
+
+虽然通过 `new Object` 和 字面量的方法都能够创建一个对象，但是使用同一个接口创建很多对象，就会产生大量重复的代码。
+
+### 2.2 工厂模式
+
+使用函数封装以特定结构创建的对象的细节
+
+```
+工厂模式.html
+    <script>
+        function createPearson (name) {
+            var p = new Object();
+            p.name = name;
+            p.sayName = function () {
+                alert(this.name)
+            }
+            return p;
+        };
+
+        var person1 = createPearson('小明');
+        var person2 = createPearson('小包');
+
+        person1.sayName();
+        person2.sayName();
+
+    </script>
+```
+
+这种方式可以，接受一个参数，然后返回一个带有属性和方法的对象；
+工厂方式的缺点，是没有解决对象识别的问题，即怎样知道一个对象的类型，(因为这里你不知道是否是在创建对象，还是仅仅在调用函数，而构造函数模式可以通过 new 来识别)
+
+### 2.2 构造函数模式
+
+原生的构造函数： Function || Array || Object 等
+除了原生的构造函数，还可以自定义构造函数：
+
+```
+learnOO_构造函数模式.html
+
+    <script>
+
+        function CreatePerson (name) {
+            this.name = name;
+            this.showName = function () {
+                alert(this.name)
+            }
+        }
+
+        var person1 = new CreatePerson('小白');
+        var person2 = new CreatePerson('小黑');
+        person1.showName()
+        person2.showName()
+
+    </script>
+```
+
+与工厂模式不同：
+1. 没有显示的创建对象；
+2. 直接将属性和方法赋值给了this对象；
+3. 没有 return 语句；
+
+按照惯例一个构造函数的函数名的首字母大写；
+要创建一个Person的实例，需要使用 new 的操作符；
+
+使用 new 会完成以下的行为：
+
+1. 创建一个新对象；
+2. 将构造函数的作用域给新的对象（因此this会指向这个新的对象）；
+3. 执行构造函数中的代码（给这个新的对象添加属性）；
+4. 返回新的对象；
+
+---------
+注：
+1. 创建自定义的构造函数可以将它的实例标识为一种特定的类型，这一点优于工厂模式；
+
+2. 构造函数都是函数，所以构造函数是function的实例；而作为实例就会沿着`__proto__`查找，作为构造函数就会具有prototype
+
+3. 一般实例都是对象，所以沿着`__proto__`会查找到Object
+
+注：所有的对象均继承自Object，所以person1 和 person2 也是Object的实例
+
+举例：
+var a = new Array;
+a -> `__proto__` ->Array.prototype（走到这一步的时候，Array是作为构造函数存在的，所以先查看prototype） -> `__proto__` -> object.prototype
+而
+Array -- 这里查找的时候是作为实例查找的，所以是走`__proto__`_查找
+Array —> `__proto__`->function.prototype
+
+
+
+
+### 2.3 constructor
+
+每一个实例下都会添加一个constructor属性，这个属性指向该实例的构造函数，但是可以被修改；
+
+```
+console.log(person1.constructor); // function CreatePerson(){};
+console.log(person1.constructor == CreatePerson); // true;
+```
+
+对象的constructor属性是用于表示对象的类型的，但是由于constructor是可读可写的所以，对于检测对象类型来说不如instanceof操作符，而instanceof操作符在跨页面的检测中同样存在问题，所以不如toString操作符；
+
+```
+    alert(person1 instanceof CreatePerson); // true;
+    alert(person1 instanceof Object) // true;
+    alert(person1 instanceof Array) // false;
+```
+
+### 2.4 深入理解构造函数
+
+1）将构造函数当做函数
+
+构造函数同样也是函数，如果直接调用函数会发生什么？
+
+```
+    <script>
+        function CreatePerson (name) {
+            this.name = name;
+            this.showName = function () {
+                alert(this.name)
+            }
+        }
+        var person1 = new CreatePerson('小白');
+        person1.showName(); // 小白
+
+        CreatePerson('小黑');
+        window.showName() // 小黑
+
+        var o = new Object();
+        CreatePerson.call(o, '小黄')
+        o.showName(); // 小黄
+
+        console.log("address")
+    </script>
+```
+
+这里说明了当不适用new 的时候，谁去调用this就指向谁，然后为这个this添加方法和属性
+
+2）构造函数的问题
+
+存在的问题：构造函数中每个方法都会在实例上重新创建一遍，也就是说同一个方法被创建了两次，造成了性能的浪费；
+
+解释：
+
+```
+    <script>
+        function CreatePerson (name) {
+            this.name = name;
+            this.showName = new Function (alert(this.name));
+        }
+        var person1 = new CreatePerson('小白');
+        person1.showName(); // 小白
+
+        var person2 = new CreatePerson('小黑');
+        person2.showName() // 小黑
+/*
+    两次创建实例的时候，就创建了两个function的实例;
+ */
+
+        console.log("address")
+    </script>
+```
+
+但是如果仅仅将这个函数一道构造函数外，又会污染全局，所以就要使用prototype；
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+补充：
+```
+    <script>
+        var a = [1,2,3]
+        var b = a; // 猜测是将a挂在了b的原型连上了，当b找不到时，就找a，如果b找到了就不在找了
+        b.push(4)
+        console.log(a) // [1,2,3,4]
+        console.log(b) // [1,2,3,4]
+
+        var c = a;
+        c = [4,5,6]; // 这里表示了新创建了一个实例，就和a没有关系了;
+        console.log(c) // [4,5,6]
+
+    </script>
+```
+
+
+
+
+
+

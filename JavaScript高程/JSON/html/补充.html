@@ -32,18 +32,24 @@
 	</script> -->
 	<script>
         var book = {
-            "title": "a book"
+            "title": "a book",
+            "authors": [
+                "小米"
+            ],
+            "edition": 4,
+            "year": 2011
         }
 
         /*var jsonText = JSON.stringify(book);
         console.log(jsonText) //"a book"*/
 
         var jsonText = JSON.stringify(book, function (key, value) {
-            if (key == '') {
-            	return value;
+            if (key == 'title') {
+                return 1;
             }
+            return value;
         });
-        console.log(jsonText) // {}
+        console.log(jsonText) //"{"title":1,"authors":["小米"],"edition":4,"year":2011}"
     </script>
 </body>
 </html>

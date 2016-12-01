@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function CreatePerson (name) {
+			this.name = name;
+			this.showName = function () {
+				alert(this.name)
+			}
+		}
+
+		var person1 = new CreatePerson('小白');
+		var person2 = new CreatePerson('小黑');
+		/*person1.showName()
+		person2.showName()
+*/
+
+
+		
+		console.dir(person2)
+		
+		alert(person1 instanceof CreatePerson); // true;
+		alert(person1 instanceof Object) // true;
+		alert(person1 instanceof Array) // false;
+
+
+
+		console.log("address")
+	</script>
+</body>
+</html>

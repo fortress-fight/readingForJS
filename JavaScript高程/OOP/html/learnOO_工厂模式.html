@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function createPearson (name) {
+			var p = new Object();
+			p.name = name;
+			p.sayName = function () {
+				alert(this.name)
+			}
+			return p;
+		};
+
+		var person1 = createPearson('小明');
+		var person2 = createPearson('小包');
+
+		person1.sayName();
+		person2.sayName();
+		console.log(1)
+
+	</script>
+</body>
+</html>
