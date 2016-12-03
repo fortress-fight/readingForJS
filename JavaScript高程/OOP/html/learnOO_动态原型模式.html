@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Create (name) {
+			this.name = name;
+			if (typeof this.sayName != 'function')  {
+				Create.prototype.sayName = function () {
+					alert(this.name)
+				}
+			}
+		}
+
+		var a = new Create('小贝');
+		a.sayName();
+
+	</script>
+</body>
+</html>

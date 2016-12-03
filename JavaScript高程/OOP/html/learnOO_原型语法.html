@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Create () {
+		}
+		Create.prototype= {
+			name: '小贝',
+			sayName: function () {
+				alert(this.name)
+			}
+		}
+
+		Object.defineProperty(Create.prototype, 'constructor', {
+			value: Create,
+			enumerable: false
+		})
+
+		var a = new Create;
+
+		a.sayName()//小贝
+
+		alert(a instanceof Create) //true
+		alert(a.constructor == Create) // true
+		alert(a.constructor == Object) // false
+	</script>
+</body>
+</html>

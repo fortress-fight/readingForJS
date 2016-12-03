@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Create () {
+		}
+		Create.prototype.name = '小白';
+
+		/**
+		 * [hasPrototypeProperty description]
+		 * @param  {String}  attr 代表查找的属性
+		 * @param  {一个实例化对象}  obj  查找的目标
+		 * @return {Boolean}      为真就是在目标的原型
+		 */
+		function hasPrototypeProperty (attr, obj) {
+			return (attr in obj) && !obj.hasOwnProperty(attr);
+		}
+
+
+		var a = new Create()
+
+		var b = hasPrototypeProperty('name', a)
+
+		alert(b) // true
+
+		a.name = '小黑'
+
+		var c = hasPrototypeProperty('name', a)
+
+		alert(c) //false
+	</script>
+</body>
+</html>
