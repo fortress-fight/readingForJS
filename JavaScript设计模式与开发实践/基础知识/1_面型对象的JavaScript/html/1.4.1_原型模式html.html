@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var a = [1,2,4];
+		var b = Object.create (a);
+		console.log(b)
+		b.push(5);
+		alert(b) // 1245
+		alert(a) // 124
+	</script>
+</body>
+</html>

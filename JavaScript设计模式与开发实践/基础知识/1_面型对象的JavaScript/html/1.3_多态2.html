@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var Duck = {
+			say: function () {
+				alert('Duck')
+			}
+		}
+		var Chicken = {
+			say: function () {
+				alert('chicken')
+			}
+		};
+
+		var makeSay = function (animal) {
+			if (typeof animal.say === 'function') {
+				animal.say();
+			}
+		}
+
+		makeSay(Duck);
+		makeSay(Chicken);
+
+		console.log('adress')
+	</script>
+</body>
+</html>

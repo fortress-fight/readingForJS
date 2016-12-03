@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var create = function () {
+			this.name = 'xiao';
+		}
+		create.prototype.sayName = function(){
+			console.log(this.name)
+		};
+		var a = new create();
+		console.log(a)
+	</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function create () {
+			this.name = '';
+		}
+		var a = new create;
+
+		alert(a.__proto__ === create.prototype) // true
+	</script>
+</body>
+</html>

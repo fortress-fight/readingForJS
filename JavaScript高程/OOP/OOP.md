@@ -494,7 +494,7 @@ console.log(person1.constructor == CreatePerson); // true;
 
 person1 和 person2 指向原型对象，构造函数的 prototype 指向原型对象，也就看出实例和其构造函数之间没有直接的联系，当实例需要调用构造函数中的 sayName 方法的时候，实际是通过原型链查找到原型对象上的属性找到的；
 
-2）isPrototypeOf || getPrototype 
+2）isPrototypeOf || getPrototypeOf
 
 isPrototypeOf 是用于检测 原型对象 和 实例的原型链指向的原型对象
 
@@ -583,7 +583,39 @@ in在单独使用的时候，会返回一个布尔值，当属性存在的时候
 
 
 2、 for-in
-for-in 在循环时，返回的是所有能够通过对象访问的，可枚举的属性，其中既包括存在于实例的属性，也包括存在于原型中的属性，但是所有由开发人员定义的属性都是可以枚举的；
+
+for-in 在循环时，返回的是所有能够通过对象访问的，可枚举的属性，其中既包括存在于实例的属性，也包括存在于原型中的属性(这是一个严重的问题)，但是所有由开发人员定义的属性都是可以枚举的；
+
+问题：如何解决for-in的时候循环到原型对象中的属性；
+
+
+```
+for (attr in obj) {
+    if (obj.hasOwnProperty(attr)) {
+      console.log(attr)
+    }
+}
+```
+
+实例：
+
+```
+<script>
+    function c (a) {
+    }
+    c.prototype.b = 'a';
+
+    var d = new c;
+    d.name = 1;
+
+    for (attr in d) {
+        if (d.hasOwnProperty(attr)) {
+          console.log(attr) // name
+        }
+    }
+</script>
+```
+
 
 在E5 中，Object.key() 反回一个存放能够通过对象访问的，可枚举的属性；
 
