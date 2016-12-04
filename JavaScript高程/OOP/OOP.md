@@ -976,28 +976,59 @@ isPrototypeOf()
 ### 3.4 寄生组合式继承
 
 ```
+    function object (superType) {
+        function F () {};
+        F.prototype = superType;
+        return new F();
+    }
+    function inheritPrototype (subType, superType) {
+        var prototype = object(superType.prototype);
+        prototype.constructor = subType;
+        subType.prototype = prototype;
+    }
+```
+
+与书上有些出入，但是实验书本上并不能实现，其说的功能
+应该是出现了误印；
+实例：
+```
     <script>
-        function inheritPrototype (subType, superType) {
-            var prototype = Object(superType.prototype);
-            prototype.prototype.constructor = subType;
-            subType.prototype = prototype;
-        }
-/*
-        function inheritPrototype1 (superType) {
+        function object (superType) {
             function F () {};
-            F.prototype = superType.prototype;
+            F.prototype = superType;
             return new F();
         }
-        subType.prototype = inheritPrototype1(superType);
-        subType.prototype.constructor = subType;*/
+        function inheritPrototype (subType, superType) {
+            var prototype = object(superType.prototype);
+            prototype.constructor = subType;
+            subType.prototype = prototype;
+        }
+
+        function a () {}
+        a.prototype = {
+          name: 9
+        }
+
+        function b () {}
+
+        inheritPrototype(b, a)
+        b.prototype.name = 12;
+        var d = new a()
+        var c = new b()
+
+        alert(c.name) //12
+        alert(d.name)//9
+
     </script>
 ```
 
-前后两种的结果是相同的，
 补：
-
 对象构造函数（Object）为给定值创建一个对象包装器。如果给定值是  null or undefined，将会创建并返回一个空对象，否则，将返回一个与给定值对应类型的对象。
 当以非构造函数形式被调用时，Object 等同于 new Object()。
+
+总结：原型式继承不需要预先定义构造函数的情况下，实现浅复制；
+寄生式继承，基于对象创建一个对象，然后为这个对象添加方法属性，然后返回，就是将添加的行为封装起来，但是不符合复用的原则，
+寄生组合式继承，集合寄生继承的优点 和 组合的优点，形成的一种继承的方法；
 
 
 
