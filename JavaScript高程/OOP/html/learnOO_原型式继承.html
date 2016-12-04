@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+        function object (o) {
+            function F(){}
+            F.prototype = o;
+            return new F();
+        }
+
+        var a = [1,2,3,4]
+
+        var b = object(a);
+        b.push(8);
+
+        alert(b) // 1.2.3.4.8
+        alert(a) // 1.2.3.4
+    </script>
+</body>
+</html>

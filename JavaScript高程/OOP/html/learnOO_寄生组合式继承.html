@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <script>
+        function inheritPrototype (subType, superType) {
+            var prototype = Object(superType.prototype);
+            prototype.prototype.constructor = subType;
+            subType.prototype = prototype;
+        }
+/*
+        function inheritPrototype1 (superType) {
+            function F () {};
+            F.prototype = superType.prototype;
+            return new F();
+        }
+        subType.prototype = inheritPrototype1(superType);
+        subType.prototype.constructor = subType;*/
+    </script>
+</body>
+</html>
