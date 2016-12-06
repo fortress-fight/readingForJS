@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*Function.prototype.bind = function(context) {
+			var self = this;
+			return function () {
+				return self.apply(context, arguments)
+			}
+		}*/
+		Function.prototype.bind = function() {
+			var _this = this,
+				context = [].shift.call(arguments),
+				args = [].slice.call(arguments); // 将剩余的参数转换成数组；
+			return function () {
+				return _this.apply(context, [].concat.call(args, [].slice.call(arguments)))
+			}
+		};
+
+		var obj = {
+			name: '小白'
+		};
+
+		var fn = function (a, b, c, d) {
+			alert(this.name); // 小白
+			alert([a, b, c, d]) // 1,2,3,4
+		}.bind(obj,1,2)
+		fn(3,4);
+	</script>
+</body>
+</html>

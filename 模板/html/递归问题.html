@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function fn (num) {
+			if (num <= 1) {
+				return 1;
+			} else {
+				return num * arguments.callee(num-1);
+			}
+		}
+
+		var nFn = fn;
+		fn = null;
+
+		var a = nFn(10);
+		alert(a)
+	</script>
+</body>
+</html>

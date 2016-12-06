@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		document.onclick = function () {
+			alert(this.nodeName) // document
+			function fn () {
+				alert (this.nodeName)
+			}
+			fn.call(this); // document
+		}
+	</script>
+</body>
+</html>
