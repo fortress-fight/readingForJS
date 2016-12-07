@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	   /* var extent = (function () {
+	    	var value = 0;
+	    	return {
+	    		call: function () {
+		    		console.log(value++);
+		    	}
+		    }
+	    })();
+	    var extent = extent.call;
+	    extent(); // 0
+	    extent(); // 1
+	    extent(); // 2
+	    extent(); // 3
+*/
+	   /* function Extent () {
+	    	this.value = 0;
+	    }
+	    Extent.prototype.call = function(){
+	    	console.log(this.value++);
+	    };
+
+	    var extent = new Extent;
+
+	    extent.call();// 0
+	    extent.call();// 1
+	    extent.call();// 2
+	    extent.call();// 3*/
+
+
+	    var extent = {
+	    	value: 0,
+	    	call: function () {
+	    		console.log(this.value++);
+	    	}
+	    }
+	    extent.call(); // 0
+	    extent.call(); // 1
+	    extent.call(); // 2
+	    extent.call(); // 3
+	</script>
+</body>
+</html>

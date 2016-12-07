@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="execute">点击我执行命令</button>
+	<button id="undo">点击我执行命令</button>
+	<script>
+		/* 预先植入的命令 方法 */
+		var Tv = {
+			open: function () {
+				console.log('打开');
+			},
+			close: function () {
+				console.log('关闭');
+			}
+		}
+
+		// 命令的接受者
+
+		/*
+		面向对象的实现方式
+		function OpenTvCommand (reserves) {
+			this.reserves = reserves;
+		}
+		OpenTvCommand.prototype.execute = function(){
+			this.reserves.open();
+		};
+		OpenTvCommand.prototype.undo = function(){
+			this.reserves.close();
+		};*/
+
+		/*必报的实现方式*/
+
+		var createCommand = function (receiver) {
+			var execute = function () {
+				return receiver.open();
+			};
+			var undo = function () {
+				return receiver.close();
+			};
+			return {
+				execute: execute,
+				undo: undo
+			}
+		}
+
+		// 命令的发起者
+
+		var setCommand = function (command) {
+			document.getElementById('execute').onclick =function () {
+				command.execute();
+			},
+			document.getElementById('undo').onclick =function () {
+				command.undo();
+			}
+		}
+
+		// setCommand(new OpenTvCommand(Tv));
+		setCommand(createCommand(Tv))
+	</script>
+</body>
+</html>
