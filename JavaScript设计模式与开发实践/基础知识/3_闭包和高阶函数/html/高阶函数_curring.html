@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		var cost = (function(){
+			var arg = [];
+
+			return function () {
+				if (arguments.length === 0) {
+					var all = 0;
+					for (var i = 0; i < arg.length; i++) {
+						all += arg[i];
+					}
+					return all;
+				} else {
+					for (var i = 0; i < arguments.length; i++) {
+						console.log(arguments[i])
+						arg.push(arguments[i]);
+					}
+				}
+			}
+		})();
+
+		cost(1, 2, 3);
+		cost(2);
+		cost(3);
+		alert(cost()); // 11;
+
+	</script>
+</body>
+</html>

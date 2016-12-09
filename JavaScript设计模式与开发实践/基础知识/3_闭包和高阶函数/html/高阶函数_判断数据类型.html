@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		/*var isArray = function (obj) {
+			return Object.prototype.toString.call(obj) == '[object Array]';
+		};
+		var isString = function (obj) {
+			return Object.prototype.toString.call(obj) == '[object String]';
+		};
+		var isObject = function (obj) {
+			return Object.prototype.toString.call(obj) == '[object Object]';
+		};
+		var a = [];
+		alert(isArray(a));*/
+
+
+		/*var Type = {};
+
+		// for 第一个是 创建参数，第二个是判断条件，当type不存在的时候，就是false，就结束循环了
+
+		for (var i = 0, type; type = ['String', 'Array', 'Object'][i++];){
+			;(function(type){
+				Type['is'+type] = function (obj) {
+					return Object.prototype.toString.call(obj) === '[object '+ type +']'
+				}
+			})(type);
+		};
+
+		var a = [];
+		alert (Type.isArray(a));*/
+
+		(function () {
+			window.Type = {};
+			for (var i = 0, type; type = ['String', 'Array', 'Object'][i++];){
+				(function(type){
+					Type['is'+type] = function (obj) {
+						return Object.prototype.toString.call(obj) === '[object '+ type +']'
+					}
+				})(type);
+			}
+		})();
+
+		var a = [];
+		alert (Type.isArray(a));
+	</script>
+</body>
+</html>
