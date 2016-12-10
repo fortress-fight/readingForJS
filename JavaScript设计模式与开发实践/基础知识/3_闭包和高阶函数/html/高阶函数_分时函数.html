@@ -13,6 +13,13 @@
 </head>
 <body>
 	<script>
+		/**
+		 * 用于将一次加载多个的行为变成，多次加载
+		 * @param  {数组}   ary   存放要加载的数据
+		 * @param  {Function} fn    对数据的处理
+		 * @param  {number}   count 一次加载的个数
+		 * @return {[type]}         [description]
+		 */
 		var timeChunk = function (ary, fn, count) {
 			var obj,
 				t,

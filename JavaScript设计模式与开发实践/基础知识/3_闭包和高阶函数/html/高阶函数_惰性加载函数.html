@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		/*var addEvent = function (elem, type, handler) {
+			if (window.addEventListener) {
+				return elem.addEventListener(type, handler, false);
+			} else if (window.attachEvent) {
+				return elem.attachEvent('on' + type, handler);
+			};
+		};*/
+
+			/*var addEvent = (function () {
+				if (window.addEventListener) {
+					return function (elem, type, handler) {
+						elem.addEventListener(type, handler, false)
+					};
+				} else if (window.attachEvent) {
+					elem.attachEvent(elem, handler)
+				}
+			})()*/
+
+
+		var addEvent = function (elem, type, handler) {
+			if (window.addEventListener) {
+				addEvent = function (elem, type, handler) {
+					elem.addEventListener(type, handler, false)
+				}
+			} else if (window.attachEvent) {
+				addEvent = function (elem, type, handler) {
+					elem.attachEvent(elem, handler)
+				}
+			}
+
+			addEvent (elem, type, handler);
+		}
+		addEvent(window, 'click', function () {
+			alert(this)
+		})
+	</script>
+</body>
+</html>
