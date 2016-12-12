@@ -1,0 +1,124 @@
+<!--
+	作者：papa909@163.com
+	时间：2016-12-10
+	描述：滚屏  第一屏：留言板  瀑布式布局
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<style>
+		.massage_box ul {
+			position: relative;
+			background:#ccc;
+		 	overflow:auto;
+		}
+		.massage_box li {
+			width:100px;
+			position: absolute;
+			background: #fff;
+			border: solid 1px #ccc;
+			text-align: center;
+			padding: 10px;
+			left: 0px;
+			top: 0;
+			word-break: break-all;
+		}
+		.massage_btn{
+			width:100%;
+			height:100px;
+			position:relative;
+		}
+		.massage_btn textarea{
+			width: 500px;
+			height:60px;
+			position:absolute;
+			top:0;
+			left:50%;
+			margin-left: -250px;
+			font: 16px/30px  "微软雅黑";
+			text-indent: 2em;
+			border-radius: 30px;
+		}
+		.massage_btn input{
+			position:absolute;
+			top:60px;
+			left:50%;
+			margin-left:-250px;
+			width: 500px;
+			height:30px;
+			border:none;
+			color:#fff;
+			font: bold 16px/30px  "微软雅黑";
+			border-radius: 50%;
+			background: skyblue;
+		}
+	</style>
+</head>
+<body>
+	<section id="massage">
+		<div class="massage_box">
+			<ul>
+
+			</ul>
+			<div class="massage_btn">
+				<textarea name="massage" ></textarea>
+				<input type="button" value="提交留言" />
+			</div>
+		</div>
+	</section>
+</body>
+</html>
+<script src="jquery-3.1.1.js"></script>
+
+<script>
+/*设置一屏高度*/
+var $massage=$('#massage');
+$massage[0].style.height= document.documentElement.clientHeight+'px';
+var $ul=$('.massage_box ul');
+$ul[0].style.height=document.documentElement.clientHeight -100+'px';
+var arr=[];
+$('[type="button"]').click(function(){
+	var $values=$('[name="massage"]')[0].value;
+	var $li=$('<li>'+$values+'</li>');
+	$li.appendTo($ul);
+	// buju();
+	// $ul.append($li);
+})
+
+
+
+function buju(){//定义成函数便于调用
+/*瀑布式布局*/
+var margin = 10;//这里设置间距
+var li=$("li");//这里是区块名称
+var	li_W = li[0].offsetWidth + margin+'px';//取区块的实际宽度（包含间距，这里使用源生的offsetWidth函数，不适用jQuery的width()函数是因为它不能取得实际宽度，例如元素内有pandding就不行了）
+var h=[];//记录区块高度的数组
+var n = document.documentElement.offsetWidth/li_W||0;//窗口的宽度除以区块宽度就是一行能放几个区块
+for(var i = 0;i < li.length;i++) {//有多少个li就循环多少次
+	li_H = li[i].offsetHeight;//获取每个li的高度
+	if(i < n) {//n是一行最多的li，所以小于n就是第一行了
+		h[i]=li_H;//把每个li放到数组里面
+		li.eq(i).css("top",0);//第一行的Li的top值为0
+		li.eq(i).css("left",i * li_W);//第i个li的左坐标就是i*li的宽度
+		}
+	else{
+		min_H =Math.min.apply(null,h) ;//取得数组中的最小值，区块中高度值最小的那个
+		minKey = getarraykey(h, min_H);//最小的值对应的指针
+		h[minKey] += li_H+margin ;//加上新高度后更新高度值
+		li.eq(i).css("top",min_H+margin);//先得到高度最小的Li，然后把接下来的li放到它的下面
+		li.eq(i).css("left",minKey * li_W);	//第i个li的左坐标就是i*li的宽度
+	}
+	$("h3").eq(i).text("编号："+i+"，高度："+li_H);//把区块的序号和它的高度值写入对应的区块H3标题里面
+	}
+}
+/* 使用for in运算返回数组中某一值的对应项数(比如算出最小的高度值是数组里面的第几个) */
+function getarraykey(s, v) {for(k in s) {if(s[k] == v) {return k;}}}
+/*这里一定要用onload，因为图片不加载完就不知道高度值*/
+window.onload = function() {buju();};
+/*浏览器窗口改变时也运行函数*/
+window.onresize = function() {buju();};
+
+</script>
