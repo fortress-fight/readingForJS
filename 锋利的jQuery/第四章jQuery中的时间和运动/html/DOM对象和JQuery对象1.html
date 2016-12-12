@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src='jquery-3.1.1.js'></script>
+</head>
+<body>
+	<input type="checkbox" name="" id="cr">
+	<label for="cr">我已阅读</label>
+	<script>
+		/*$(function () {
+			var $cr = $('#cr');
+			var cr = $cr[0];
+			$cr.click(function () {
+				if (cr.checked) {
+					alert('suc')
+				}
+			})
+		})*/
+		$(function () {
+			$('#cr').click(function () {
+				if ($(this).is(':checked')) {
+					alert('suc')
+				}
+			})
+		})
+	</script>
+</body>
+</html>

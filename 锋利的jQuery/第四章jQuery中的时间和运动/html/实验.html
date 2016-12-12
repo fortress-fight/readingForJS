@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<script src = 'jquery-3.1.1.js'></script>
+	<script>
+		$('div').mouseover(function () {
+			$('div').animate({
+				height: 500,
+				opacity: 0.5
+			},3000).animate ({
+				width: 500
+			},3000)
+		}).click(function () {
+			$('div:animated').css('background', 'yellow');
+			$('div').stop(true, true);
+		})
+	</script>
+</body>
+</html>
