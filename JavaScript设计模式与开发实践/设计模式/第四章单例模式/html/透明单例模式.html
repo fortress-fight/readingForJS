@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// var CreateDiv = (function () {
+		// 	var instance = null;
+		// 	return function (html) {
+		// 		if (instance) {
+		// 			return instance;
+		// 		}
+		// 		this.html = html;
+		// 		this.inite()
+		// 		return instance = this;
+		// 	};
+
+		// })()
+
+		// CreateDiv.prototype.inite = function(){
+		// 	var div = document.createElement('div');
+		// 	div.innerHTML = this.html;
+		// 	document.body.appendChild(div);
+		// };
+		//
+		
+
+		var CreateDiv = (function () {
+			var instance = null;
+			var CreateDiv = function (html) {
+				if (instance) {
+					return instance;
+				}
+				this.html = html;
+				this.inite()
+				return instance = this;
+			};
+
+			CreateDiv.prototype.inite = function(){
+				var div = document.createElement('div');
+				div.innerHTML = this.html;
+				document.body.appendChild(div);
+			};
+
+			return CreateDiv;
+
+		})()
+
+
+		var a = new CreateDiv('one');
+		var b = new CreateDiv('two');
+		// 这里只会创建一个one
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var CreateDiv = function (html) {
+			this.html = html;
+			this.inite();
+		}
+		CreateDiv.prototype.inite = function(){
+			var div = document.createElement('div');
+			div.innerHTML = this.html;
+			document.body.appendChild(div);
+		};
+
+		var proxySingletonCreatDiv = (function(){
+			var instance = null;
+			return function (html) {
+				if (!instance) {
+					instance = new CreateDiv(html);
+				}
+				return instance;
+			}
+		})();
+
+		var a = new proxySingletonCreatDiv('one');
+		var b = new proxySingletonCreatDiv('two');
+
+		alert(a === b) // true
+		
+	</script>
+</body>
+</html>

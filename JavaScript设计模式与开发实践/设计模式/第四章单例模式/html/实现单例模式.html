@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*var Singleton = function (name) {
+			this.name = name;
+			this.instance = null;
+		}
+		Singleton.prototype.getName = function(){
+			alert(this.name)
+		};
+		Singleton.getInstance = function(name){
+			if (!this.instance) {
+				this.instance = new Singleton(name);
+			}
+				return this.instance;
+		};
+
+		var a = Singleton.getInstance('小白');
+		var b = Singleton.getInstance('小白2');
+		a.getName(); // 小白
+		b.getName(); // 小白
+
+		alert(a === b)*/
+
+		var Singleton = function (name) {
+			this.name = name;
+		}
+		Singleton.prototype.getName = function () {
+			alert(this.name);
+		}
+		Singleton.getInstance = (function () {
+			var instance = null;
+			return function (name) {
+				if (!instance) {
+					instance = new Singleton(name);
+				}
+				return instance;
+			}
+		})()
+		var a = Singleton.getInstance('小白');
+		var b = Singleton.getInstance('小白2');
+		a.getName(); // 小白
+		b.getName(); // 小白
+
+		alert(a === b)
+
+	</script>
+</body>
+</html>

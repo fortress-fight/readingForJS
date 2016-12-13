@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*var nameSpace = {
+			name: 'name',
+			age: 20,
+			sayName: function () {
+				alert(this.name)
+			}
+		}*/
+
+		var myApp = {};
+
+		myApp.namespace = function (name) {
+			var parts = name.split('.');
+			var current = myApp;
+			for (attr in parts) {
+				if (!current[parts[attr]]) {
+					current[parts[attr]] = {};
+				}
+				current = current[parts[attr]];
+			};
+		};
+
+		myApp.namespace('event');
+		myApp.namespace('dom.style');
+
+		console.log(myApp)
+
+		/*dom:Objectstyle:Object__proto__:Objectevent:Object*/
+	</script>
+</body>
+</html>

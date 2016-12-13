@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var user = (function () {
+			var _name = 'name',
+				_age = '20'
+			return {
+				getUserInfo: function () {
+					return _name +'_'+ _age;
+				}
+			}
+		})()
+
+		console.log(user.getUserInfo())
+		//name_20
+	</script>
+</body>
+</html>
