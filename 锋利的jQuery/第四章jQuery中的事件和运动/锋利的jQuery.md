@@ -219,7 +219,7 @@ stop([clearQueue],[gotoEnd])
 3）延迟： 
 delay()
 ```
-$('div').animate({left:'+=500px')
+$('div').animate({left:'+=500px'})
         .delay(3000)
         .animate({top:'500px'},3000)
 ```
