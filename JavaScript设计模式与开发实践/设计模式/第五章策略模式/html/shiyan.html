@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#wrap {
+			width: 500px;
+			margin: auto;
+		}
+		#box1 {
+			position: relative;
+			/*border: 1px solid black;*/
+			width: 200px;
+			height: 500px;
+			transition: 5s;
+			overflow: hidden;
+			float: left;
+		}
+		#box2 {
+			float: left;
+			position: relative;
+			/*border: 1px solid black;*/
+			width: 200px;
+			height: 500px;
+			transition: 5s;
+			overflow: hidden;
+		}
+		#box,
+		#box3 {
+			width: 400px;
+			height: 500px;
+			transform-origin: center center;
+			transition: 5s;
+		}
+		#box3 {
+			transform-origin: left center;
+
+		}
+		#wrap:hover #box {
+			transform: rotate(-180deg);
+		}
+		#wrap:hover #box3 {
+			transform: rotate(-180deg);
+
+		}
+		#box1 div:nth-child(1),
+		#box2 div:nth-child(1) {
+			/*transform-origin: right center;*/
+			position: absolute;
+			top: 0; right: 0;
+			bottom: 0;
+			margin: auto;
+			width: 500px;
+			height: 1000px;
+			background: #58a;
+		}
+		#box2 div:nth-child(1) {
+			right: 200px;
+			top: 0; left: auto;
+			background: #fb3;
+
+		}
+		#box1 div:nth-child(2),
+		#box2 div:nth-child(2) {
+			position: absolute;
+			left: 200px; top: 0;
+			bottom: 0;
+			margin: auto;
+			width: 500px;
+			height: 1000px;
+			/*transform-origin: left center;*/
+			background: #fb3;
+		}
+		#box2 div:nth-child(2) {
+			background: #58a;
+			left: 0;
+			right: auto; top: 0;
+		}
+	</style>
+
+</head>
+<body>
+<div id="wrap">
+	<div id="box1">
+		<section id="box">
+		<div></div>
+		<div></div>
+		</section>
+	</div>
+	<div id="box2">
+		<section id="box3">
+			<div></div>
+			<div></div>
+		</section>
+	</div>
+</div>
+<script>
+
+</script>
+</body>
+</html>

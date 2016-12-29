@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		
+	@keyframes ro {
+		0% {
+			-webkit-transform: rotateY(0);
+			transform: rotateY(0);
+		}
+		50% {
+			-webkit-transform: rotateY(180deg);
+			transform: rotateY(180deg);
+		}
+		100% {
+			-webkit-transform: rotateY(360deg);
+			transform: rotateY(360deg);
+		}
+	}
+
+body {
+	transform-style: preserve-3d;
+}
+	div {
+		width: 100px;
+		height: 100px;
+		margin: auto;
+		background: #58a;
+		animation: ro  2s;
+	}
+	</style>
+</head>
+<body>
+	<div></div>
+
+</body>
+</html>

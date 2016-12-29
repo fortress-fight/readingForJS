@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script>
+// 策略组
+	var strategies = {
+		"S": function (salary) {
+			return salary * 4;
+		},
+		"A": function (salary) {
+			return salary * 3;
+		},
+		"B": function (salary) {
+			return salary * 2;
+		}
+	};
+
+// 环境组
+	var calculateBounce = function (lv, salary) {
+		return strategies[lv](salary)
+	}
+
+	alert(calculateBounce('S', 1000)) // 4000
+
+</script>
+</body>
+</html>

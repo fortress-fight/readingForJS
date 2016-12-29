@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var myImage = (function () {
+					var imgNode = document.createElement('img');
+					document.body.appendChild(imgNode);
+					return function (src) {
+						imgNode.src = src;
+					}
+				})();
+
+		var proxyImg = (function () {
+			var img = new Image();
+			img.onload = function () {
+				myImage(this.src)
+			}
+			return function (src) {
+				myImage('36E58PICcb6_1024.jpg')
+				img.src = src;
+			}
+		})()
+		proxyImg('http://img2.niutuku.com/desk/1207/1051/ntk133277.jpg')
+	</script>
+</body>
+</html>
