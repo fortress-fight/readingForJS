@@ -142,10 +142,10 @@ textStatus -- 请求的状态；
 3）GET 会出现在浏览器缓存中
 
 4) 在php中的接受方式不同
-get -- $_GET[]
-post -- $_POST[];
+`get -- $_GET[]`
+`post -- $_POST[];`
 
-两种都可以通过$_REQUEST[]的方式获取
+两种都可以通过`$_REQUEST[]`的方式获取
 
 3. $.getScript() || $.getJson()
 
@@ -175,6 +175,11 @@ error：(fn) 请求失败后，调用的函数 3个参数 1）XHR对象， 2）�
 
 gloab：默认true 表示是否触发全局AJAX
 
+jsonp: 在一个jsonp请求中重写回调函数的名字。这个值用来替代在"callback=?"这种GET或POST请求中URL参数里的"callback"部分，比如{jsonp:'onJsonPLoad'}会导致将"onJsonPLoad=?"传给服务器。
+
+jsonpCallback: 为jsonp请求指定一个回调函数名。这个值将用来取代jQuery自动生成的随机函数名。这主要用来让jQuery生成度独特的函数名，这样管理请求更容易，也能方便地提供回调函数和错误处理。你也可以在想让浏览器缓存GET请求的时候，指定这个回调函数名。
+
+......
 
 ### 4 序列化元素
 
