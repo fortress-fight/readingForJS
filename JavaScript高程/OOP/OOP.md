@@ -19,15 +19,15 @@
 对象字面量：
 
 ```
-        var person = {
-            name: '小米',
-            age: '29',
-            job: 'student',
-            sayName: function () {
-                alert(this.name);
-            }
-        }
-        person.sayName();
+var person = {
+    name: '小米',
+    age: '29',
+    job: 'student',
+    sayName: function () {
+        alert(this.name);
+    }
+}
+person.sayName();
 ```
 
 两种方法创建的对象，的属性在创建的时候都带有一些特征值，JavaScript通过这些特征值定义他们的行为；
@@ -1047,9 +1047,3 @@ isPrototypeOf()
 
     </script>
 ```
-
-
-
-
-
-
