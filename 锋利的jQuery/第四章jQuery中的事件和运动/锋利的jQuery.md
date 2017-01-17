@@ -89,6 +89,8 @@ jq中的事件对象对常用原生的事件对象进行了封装，所以ev使�
 
 8） metaKey -- ctrl按键
 
+9） ev.originalEvent -- 原生的事件对象，但是在jQ的ev中可以直接使用原生的东西
+
 ### 1.6 事件解绑
 
 jq中的事件都是通过事件绑定的形式处理的；
@@ -214,9 +216,9 @@ stop([clearQueue],[gotoEnd])
 如果想让它当前运动立即停止，并且状态也要执行到当前动画的最终状态；就设置[gotoEnd]为true；
 
 2）判断是否处于运动状态
-使用is(':animated'); 
+使用is(':animated');
 
-3）延迟： 
+3）延迟：
 delay()
 ```
 $('div').animate({left:'+=500px'})
@@ -234,4 +236,3 @@ toggle()相当于show 和hide结合
 fadeTo(speed,opacity[,callback])
 
 动画的属性值可以为特殊值：show || hide || toggle
-
