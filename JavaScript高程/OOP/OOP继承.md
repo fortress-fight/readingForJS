@@ -41,10 +41,16 @@ JavaScript不存在接口，所以只能实现继承，即通过原型继承属�
 实现过程：
 首先会在instance（实例对象）中查找，没有找到，就通过其原型链找到其构造函数的原型对象，此时原型对象指向了一个实例对象，并且还添加了getSubValue的方法，所以这个原型对象下就包含了一个getSubValue的方法，以及一个指向SuperType的原型对象的指针，在这个原型对象中依旧没有找到getSuperValue方法，于是继续沿着原型链查找到SuperType的原型对象，最终在SuperType的原型对象下找到了getSuperValue方法，返回；
 
-注意：
-1. 这里由于getSubValue的原型对象指向了一个getSuperValue实例对象，所以constructor就是实例对象指针指向的getSuperValue的原型对象下的constructor，需要修正
+补充：
+通过实现原型链，本质上是扩展了原型搜索机制，当以读取模式访问一个实例属性的时候，会通过以下步骤去查找：
+1. 在实例中搜索该属性，
+2. 搜索实例的原型
+3. 沿着原型链继续查找
 
-2. 如果在SuperType的原型对象下没有找到getSuperValue方法，那么就会沿着SuperType的原型对象下的指向其构造函数Object的指针，找到Object；
+注意：
+- 这里由于getSubValue的原型对象指向了一个getSuperValue实例对象，所以constructor就是实例对象指针指向的getSuperValue的原型对象下的constructor，需要修正
+
+- 如果在SuperType的原型对象下没有找到getSuperValue方法，那么就会沿着SuperType的原型对象下的指向其构造函数Object的指针，找到Object；
 
 ```
     <script>
@@ -97,8 +103,7 @@ unction和Object，既是函数，因为都可以Function()或者Object()这样�
 Object的原型链指针指向null；所以Object就是原型链的终点
 `alert(Object.getPrototypeOf(Object.prototype))// null`
 
-<img src="img/原型继承.png" alt="">
-
+![原型继承](./img/原型继承.png)
 
 #### 3.1.1 确定原型和实例之间的关系
 
@@ -206,7 +211,7 @@ isPrototypeOf()
     </script>
 ```
 
-但是包含引用类型值的属性始终都会共享相应的值，
+这种方式属于浅复制去，其包含的引用类型值的属性始终都会共享相应的值，
 
 在E5 中 Object.create() 规范了原型式继承；
 可以传入两个参数，一个是要拷贝的对象，一个是要想这个对象中添加的属性；
@@ -255,7 +260,7 @@ isPrototypeOf()
 
 与书上有些出入，但是实验书本上并不能实现，其说的功能
 应该是出现了误印；
-实例：
+实例1：
 ```
     <script>
         function object (superType) {
@@ -286,6 +291,48 @@ isPrototypeOf()
 
     </script>
 ```
+
+实例2：
+```
+function object(o) {
+    function F () {};
+    F.prototype = o;
+    return new F();
+}
+function inheritPrototype (subType, superType) {
+    var prototype = object(superType.prototype);
+    prototype.constructor = subType;
+    subType.prototype = prototype;
+};
+function SuperType (name) {
+    this.name = name;
+    this.colors = ['red','blue']
+};
+
+SuperType.prototype.sayName = function () {
+    console.log(this.name);
+};
+
+function SubType (name,age) {
+    SuperType.call(this,name);
+    this.age = age;
+}
+
+inheritPrototype(SubType,SuperType)
+
+SubType.prototype.sayAge = function () {
+    console.log(this.age);
+};
+
+var sub = new SubType('xiao', '22');
+var sup = new SuperType('bai', '2')
+sub.sayName(); // xiao
+sub.sayAge(); // 22
+sub.colors.push('black');
+console.log(sub.colors); //["red", "blue", "black"]
+console.log(sup.colors); // ["red", "blue"]
+```
+
 
 补：
 对象构造函数（Object）为给定值创建一个对象包装器。如果给定值是  null or undefined，将会创建并返回一个空对象，否则，将返回一个与给定值对应类型的对象。
