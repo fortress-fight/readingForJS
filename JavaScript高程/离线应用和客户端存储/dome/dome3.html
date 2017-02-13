@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        var CookieUtil = {
+            get: function(name) {
+                var cookieName = encodeURIComponent(name) + '=',
+                    cookieStart = document.cookie.indexOf(cookieName),
+                    cookieValue = null;
+
+                if (cookieStart > -1) {
+                    var cookieEnd = document.cookie.indexOf(';', cookieStart);
+                    if (cookieEnd == -1) {
+                        cookieEnd = document.cookie.length;
+                    }
+                    cookieValue = decodeURIComponent(document.cookie.substring(cookieStart +
+                        cookieName.length, cookieEnd));
+                }
+                return cookieValue;
+            },
+            set: function(config) {
+                var settings = {
+                    name: '',
+                    value: '',
+                    expires: '',
+                    path: '',
+                    domain: '',
+                    secure: ''
+                }
+                for (var item in config) {
+                    if (config.hasOwnProperty(item)) {
+                        settings[item] = config[item]
+                    }
+                }
+                console.log(settings);
+                var cookieText = encodeURIComponent(settings.name) + '=' +
+                    encodeURIComponent(settings.value);
+
+                if (settings.expires instanceof Date) {
+                    cookieText += '; expires=' + settings.expires.toGMTString();
+                }
+                if (settings.path.length) {
+                    cookieText += '; path=' + settings.path;
+                }
+                if (settings.domain.length) {
+                    cookieText += '; domain=' + settings.domain;
+                }
+                if (settings.secure.length) {
+                    cookieText += '; secure=' + settings.secure;
+                }
+                document.cookie = cookieText;
+            },
+
+            unset: function(config) {
+                config.expires = new Date(0);
+                this.set(config)
+            }
+        }
+
+        CookieUtil.set({
+            name: 'xiaobai',
+            value: '22',
+            expires: new Date(+new Date() + 50000)
+        })
+
+        CookieUtil.unset({
+            name: 'name'
+        })
+    </script>
+</body>
+
+</html>
