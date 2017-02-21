@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			position: absolute;
+			top: 100px; left: 100px;
+			width: 100px;
+			height: 100px;
+			background: #58a;
+		}
+		.fire {
+			position: absolute;
+			top: -10px;
+			width: 20px; height: 20px;
+			left: 50%;
+			background: #fb3;
+		}
+	</style>
+</head>
+<body>
+	<div>
+	</div>
+	<script src = 'move.js'></script>
+	<script>
+		var target = document.querySelector('div');
+		window.onkeydown = start;
+		function start (ev) {
+			var ev = ev || window.event;
+			var timer = ev.keyCode;
+			if (window.timer) {
+				return;
+			}
+			window.timer = setInterval(function () {
+				move(ev,timer)
+			}, 50)
+			console.log(window.timer)
+		}
+		function move (ev,timer) {
+			var numT = target.offsetTop;
+			var numL = target.offsetLeft;
+			switch (timer) {
+				case 37:
+					numL -= 10;
+					break;
+				case 38:
+					numT -= 10;
+					break;
+				case 39:
+					numL += 10;
+					break;
+				case 40:
+					numT += 10;
+					break;
+				case 32:
+					fire();
+					break;
+			}
+			if (numT < 0) {
+				numT = 0;
+			}
+			if (numL < 0) {
+				numL = 0;
+			}
+			target.style.top = numT + 'px';
+			target.style.left = numL + 'px';
+		}
+
+		function fire () {
+			var span = document.createElement('span');
+			target.appendChild(span);
+			span.className = 'fire';
+			startMove(span,{left: 500}, 1000,function () {
+				target.removeChild(span);
+			})
+		}
+		window.onkeyup = function (ev) {
+			var ev = ev || window.event;
+			var timer = ev.keyCode;
+			console.log(window.timer)
+			clearInterval(window.timer);
+			window.timer = null;
+			window.onkeydown = start;
+		}
+	</script>
+</body>
+</html>

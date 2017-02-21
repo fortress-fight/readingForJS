@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<input type="text" name="name" id="">
+	<input type="passwrad" name="passwrad" id="">
+	<script>
+        var text = document.getElementsByName('name')[0];
+        var passwrad = document.getElementsByName('passwrad')[0];
+        var name =  prompt('are you ok');
+        text.value = name;
+        text.onfocus = function () {
+            alert('请输入名称')
+        }
+        passwrad.onfocus = function () {
+            alert('请输入密码')
+        }
+
+        text.onblur = function () {
+            alert('确认名称')
+        }
+        passwrad.onblur = function () {
+            alert('确认密码')
+        }
+    </script>
+</body>
+</html>

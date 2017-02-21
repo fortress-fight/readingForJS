@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button">
+	<script>
+		var oBtn = document.querySelector('input');
+		oBtn.addEventListener('click', function (ev) {
+			var ev = ev || window.event;
+			ev.cancelBubble = true;
+			alert(ev.srcElement)
+		})
+		document.onclick = function () {
+			alert(1);
+		}
+	</script>
+</body>
+</html>

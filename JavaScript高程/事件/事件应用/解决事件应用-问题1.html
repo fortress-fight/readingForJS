@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box,
+		#box1 {
+			position: absolute;
+			top: 0; left: 0;
+			width: 100px;
+			height: 100px;
+			background: #58a;
+		}
+		#box1 {
+			top: 300px;
+			left: 550px;
+			background: #fb3;
+		}
+	</style>
+</head>
+<body>
+	啊啊啊啊啊啊啊啊
+	<div id="box">啊啊啊啊啊啊啊啊</div>
+	<div id="box1"></div>
+	<script>
+		var oBox = document.getElementById('box');
+
+		oBox.onmousedown = function (ev) {
+			var ev = ev || window.event;
+			var x = ev.clientX - this.offsetLeft;
+			var y = ev.clientY - this.offsetTop;
+			/*
+				当鼠标按下的时候，且浏览器支持全局捕获，那么就把oBox设置成为全局捕获
+			 */
+			if (oBox.setCapture) {
+				oBox.setCapture();
+			}
+
+			document.onmousemove = function (ev) {
+				var ev = ev || window.event;
+				oBox.style.top = ev.clientY - y + "px";
+				oBox.style.left = ev.clientX - x + "px";
+				return false;
+			}
+
+			document.onmouseup = function () {
+				document.onmousemove = document.onmouseup = null;
+				/*
+					当鼠标抬起的时候，整个事件结束，且浏览器支持全局捕获，那么就把oBox的全局捕获释放
+				 */
+				if (oBox.setCapture) {
+					oBox.releaseCapture();
+				}
+			}
+		}
+	</script>
+</body>
+</html>

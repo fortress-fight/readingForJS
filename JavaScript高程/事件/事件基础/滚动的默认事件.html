@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0;
+			height: 2000px;
+		}
+		#box {
+			width: 200px;
+			height: 200px;
+			background: #58a;
+			text-align: center;
+			overflow: auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+	</div>
+	<script>
+		var box = document.querySelector('div');
+		document.onmousewheel = fn;
+		if (addEventListener) {
+			document.addEventListener('DOMMouseScroll', fn, false);
+		}
+		// 如果fn 返回ture 则是向上滚动 返回false 就是向下滚动
+		function fn (ev) {
+			var ev = ev || window.event;
+			var b = true;
+
+
+
+			if (ev.wheelDelta) {
+				b = ev.wheelDelta > 0 ? true : false;
+			} else {
+				b = ev.detail < 0 ? true : false;
+			}
+
+			if (b) {
+				box.style.height = parseInt(getComputedStyle(box).height) - 10 +'px';
+			} else {
+				box.style.height = parseInt(getComputedStyle(box).height) + 10 +'px';
+			}
+
+
+			if (ev.preventDefault) {
+				ev.preventDefault();
+			}
+			
+			return false;
+
+
+		}
+	</script>
+</body>
+</html>

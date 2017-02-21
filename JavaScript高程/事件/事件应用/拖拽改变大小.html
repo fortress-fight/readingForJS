@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box {
+			position: absolute;
+			top: 150px; left: 150px;
+			width: 200px;
+			height: 200px;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+		var oBox = document.getElementById('box');
+		dragChange(oBox);
+		function dragChange (obj) {
+			obj.onmousedown = function (ev) {
+				var ev = ev || window.event;
+				var x = ev.clientX;
+				var y = ev.clientY;
+				var W = obj.offsetWidth;
+				var H = obj.offsetHeight;
+				var L = x - obj.offsetLeft;
+				var T = y - obj.offsetTop;
+				var R = obj.offsetWidth - L;
+				var B = obj.offsetHeight - T;
+				document.onmousemove = function (ev) {
+					if (R < 20) {
+						obj.style.width = (ev.clientX - x) + W + 'px';
+					}
+					if (B < 20) {
+						obj.style.height = (ev.clientY - y) + H + 'px';
+					}
+					if (T < 20) {
+						obj.style.top = y - T + (ev.clientY - y) + 'px';
+						obj.style.height = (y - ev.clientY) + H + 'px';
+					}
+					if (L < 20) {
+						obj.style.width = (x - ev.clientX) + W + 'px';
+						obj.style.left = x - L + (ev.clientX - x) + 'px';
+					}
+				}
+				document.onmouseup = function (){
+					document.onmousemove = document.onmouseup = null;
+				}
+			}
+		}
+	</script>
+</body>
+</html>

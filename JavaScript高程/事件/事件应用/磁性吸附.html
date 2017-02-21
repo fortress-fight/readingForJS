@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		img {
+			position: absolute;
+			top: 0; left: 0;
+		}
+		#box {
+			position: absolute;
+			top: 0; left: 0;
+			width: 100px; height: 100px;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<img src="1.jpg" alt="">
+	<div id="box"></div>
+	<script>
+		var oImg = document.querySelector('img');
+		var oBox = document.querySelector('div');
+		drag (oImg);
+		drag (oBox);
+		function drag (obj) {
+			obj.onmousedown = function (ev) {
+				var ev = ev || window.ev;
+				var x = ev.clientX - obj.offsetLeft;
+				var y = ev.clientY - obj.offsetTop;
+
+				if (obj.setCapture) {
+					obj.setCapture();
+				}
+
+				document.onmousemove = function (ev) {
+
+					var ev = ev || window.event;
+					var targetY = ev.clientY - y;
+					var targetX = ev.clientX - x;
+
+					if (targetY < 30) {
+						targetY = 0;
+					} else if (targetY > window.innerHeight - obj.offsetHeight) {
+						targetY =  window.innerHeight - obj.offsetHeight;
+					};
+
+					if (targetX < 30) {
+						targetX = 0;
+					} else if (targetX > window.innerWidth - obj.offsetWidth) {
+						targetX = window.innerWidth - obj.offsetWidth;
+					};
+
+					obj.style.top = targetY + 'px';
+					obj.style.left = targetX + 'px';
+
+					return false;
+				}
+
+				document.onmouseup = function () {
+
+					document.onmousemove = document.onmouseup = null;
+
+					if (obj.setCapture) {
+						obj.releaseCapture();
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

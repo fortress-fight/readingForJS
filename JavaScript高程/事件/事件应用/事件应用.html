@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box,
+		#box1 {
+			position: absolute;
+			top: 0; left: 0;
+			width: 100px;
+			height: 100px;
+			background: #58a;
+		}
+		#box1 {
+			top: 300px;
+			left: 550px;
+			background: #fb3;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<div id="box1"></div>
+	<script>
+		var oBox = document.getElementById('box');
+
+		/*
+		1.首先要写oBox的点击事件，目的：
+		- 所有相关事件都是以oBox的点击事件为基础的；
+		- 获取点击后，点击位置距离box的上和右两侧的位置，因为，在移动的过程中box的top和left就是鼠标位置减去点击位置距离box的上和右两侧的位置；
+		 */
+		oBox.onmousedown = function (ev) {
+			var ev = ev || window.event;
+			var x = ev.clientX - this.offsetLeft;
+			var y = ev.clientY - this.offsetTop;
+			/*
+			2. 鼠标的移动事件，之所以要写document是因为，当鼠标快速移动的时候，鼠标会脱离box，box上的鼠标移动事件就会停止。然后计算box的位置信息；
+			 */
+			document.onmousemove = function (ev) {
+				var ev = ev || window.event;
+				oBox.style.top = ev.clientY - y + "px";
+				oBox.style.left = ev.clientX - x + "px";
+			}
+			/*
+			3. 鼠标的抬起事件，这里之所以要写document是因为，如图将box移动到别的文件下面时，当鼠标抬起其，事件就会被认为是在别的元素上发生的，就不能准确触发；
+			鼠标抬起事件的时候：清除事件，这里之所以多谢了document.onmouseup = null，是因为减少影响其它事件的可能。不过不写目前没有找到任何问题；
+			 */
+			document.onmouseup = function () {
+				document.onmousemove = document.onmouseup = null;
+			}
+		}
+	</script>
+</body>
+</html>

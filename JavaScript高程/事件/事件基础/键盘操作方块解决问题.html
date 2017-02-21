@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			position: absolute;
+			top: 0; left: 0;
+			width: 100px;
+			height: 100px;
+			background-color: #58a;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<script>
+		var oDiv = document.querySelector('div');
+		var timer = null;
+		document.onkeydown = start;
+		function start(ev) {
+			var ev = ev || event;
+			tim = ev;
+			clearInterval(timer);
+			document.onkeydown = null;
+			function start1 () {
+				console.log(this)
+				switch (ev.keyCode) {
+					case 38:
+						oDiv.style.top = oDiv.offsetTop - 10 + 'px';
+						break;
+					case 39:
+						oDiv.style.left = oDiv.offsetLeft +10 + 'px';
+						break;
+					case 40:
+						oDiv.style.top = oDiv.offsetTop + 10 + 'px';
+						break;
+					case 37:
+						oDiv.style.left = oDiv.offsetLeft - 10 + 'px';
+						break;
+				}
+			}
+			timer = setInterval(start1, 100)
+		}
+		document.onkeyup = function () {
+			document.onkeydown = start;
+			clearInterval(timer);
+		}
+	</script>
+</body>
+</html>

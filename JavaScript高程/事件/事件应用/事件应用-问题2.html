@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		img {
+			position: absolute;
+			top: 0; left: 0;
+		}
+	</style>
+</head>
+<body>
+	<img src="1.jpg" alt="">
+	<script>
+		var oImg = document.querySelector('img');
+		oImg.onmousedown = function (ev) {
+			var ev = ev || window.ev;
+			var x = ev.clientX - oImg.offsetLeft;
+			var y = ev.clientY - oImg.offsetTop;
+
+			document.onmousemove = function (ev) {
+				var ev = ev || window.event;
+				oImg.style.top = ev.clientY - y + 'px';
+				oImg.style.left = ev.clientX - x + 'px';
+			}
+
+			document.onmouseup = function () {
+				document.onmousemove = document.onmouseup = null;
+			}
+		}
+	</script>
+</body>
+</html>

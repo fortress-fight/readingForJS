@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="text">
+	<ul></ul>
+	<script>
+		var oText = document.querySelector('input');
+		var oList = document.querySelector('ul');
+		oText.onkeydown = function (ev) {
+			var ev = ev || event;
+			if (ev.keyCode == 13 && ev.ctrlKey) {
+				if (oText.value != '') {
+					var li = document.createElement('li');
+					li.innerHTML = oText.value;
+					oList.appendChild(li);
+					oText.value = '';
+				} else {
+					alert('请输入内容')
+				}
+			}
+		}
+	</script>
+</body>
+</html>

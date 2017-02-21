@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box1 {
+			width: 200px;
+			height: 200px;
+			background: #58a;
+		}
+		#box2 {
+			width: 100px;
+			height: 100px;
+			background: #fb3;
+		}
+		#box3 {
+			position: absolute;
+			top: 300px;
+			left: 400px;
+			width: 50px;
+			height: 50px;
+			background: skyblue;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1">
+		<div id="box2">
+			<div id="box3"></div>
+		</div>
+	</div>
+	<script>
+		var aBox = document.getElementsByTagName('div');
+		for (var i = 0; i < aBox.length; i++) {
+			aBox[i].onclick = function () {
+				alert(this.id)
+			}
+		}
+	</script>
+</body>
+</html>

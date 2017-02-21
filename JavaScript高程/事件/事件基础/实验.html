@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			position: absolute;
+			top: 100px; left: 100px;
+			width: 200px;
+			height: 200px;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<script>
+		var target = document.querySelector('div');
+		window.onkeydown = function (ev) {
+			var numT = target.offsetTop;
+			var numL = target.offsetLeft;
+			var key = ev.keyCode;
+			switch (key) {
+				case 37:
+					numL -= 10;
+					break;
+				case 38:
+					numT -= 10;
+					break;
+				case 39:
+					numL += 10;
+					break;
+				case 40:
+					numT += 10;
+			}
+			if (numT < 0) {
+				numT = 0;
+			}
+			if (numL < 0) {
+				numL = 0;
+			}
+			target.style.top = numT + 'px';
+			target.style.left = numL + 'px';
+		}
+	</script>
+</body>
+</html>

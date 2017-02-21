@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			height: 3000px;
+		}
+		#fa {
+			width: 500px;
+			height: 500px;
+			background: red;
+			position: relative;
+		} 
+		#box {
+			position: absolute;
+			right: -50px;
+			top: 0;
+			width: 100px;
+			height: 100px;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<div id="fa">
+		<div id="box"></div>
+	</div>
+	<script>
+		function getScrollDetail (ev) {
+			if (ev.wheelDelta) {
+				return ev.wheelDelta > 0 ? true : false;
+			} else {
+				return ev.detail < 0 ? true : false;
+			}
+		}
+			document.addEventListener('mousewheel', getFlag);
+			document.addEventListener('DOMMouseScroll', getFlag);
+		if (document.mousewheel) {
+		} else {
+		}
+		function getFlag (ev) {
+			var ev = ev || window.event;
+			var a = getScrollDetail(ev);
+			console.log(a)
+		}
+
+	</script>
+</body>
+</html>

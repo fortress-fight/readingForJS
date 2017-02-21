@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="EventUtil.js"></script>
+	<script>
+		EventUtil.addHandler(document, 'click', text);
+		EventUtil.addHandler(document, 'click', text1);
+		EventUtil.removeHandler(document, 'click', text);
+		function text () {
+			alert(this+'这里是添加的第一个函数')
+		}
+		function text1 () {
+			alert(this+'这里是添加的第二个函数')
+		}
+	</script>
+</body>
+</html>

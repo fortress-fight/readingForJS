@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		document.addEventListener('click', fn, false) // 先执行 -- this 指向document
+		document.addEventListener('click', fn1, false) // 后执行
+		function fn () {
+			alert(this);
+		}
+		function fn1 () {
+			alert(1);
+		}
+	</script>
+</body>
+</html>
