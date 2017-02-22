@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 300px;
+			height: 200px;
+			background-color: #58a;
+			border: 10px solid black;
+		}
+		body {
+			margin: 0;
+		}
+		html {
+			/*overflow: hidden;*/
+		}
+		section {width: 100px;height: 2000px;background: #fb3;}
+	</style>
+</head>
+<body>
+	<div>
+		<section>这里是为了测试div和documentElement使用offset的区别</section>
+	</div>
+	<script>
+
+		// 滚动条相关尺寸：
+		var a = document.querySelector('div')
+		document.onclick = function () {
+			var scrollT = a.offsetHeight;
+			var cli = a.scrollHeight;
+			var allo = document.documentElement.offsetHeight;
+			var alls = document.documentElement.scrollHeight;
+			document.write('div获取的尺寸：'+'scrollHeight'+scrollT +':'+'client'+cli+'documentElement'+allo+':'+alls );
+		}
+
+	</script>
+</body>
+</html>

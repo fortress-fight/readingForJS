@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		document.onclick = function () {
+/*
+			// 功能：
+			open(); // 打开空白页；
+			open('http://www.baidu.com');//打开指定链接
+			open('http://www.baidu.com','_self');//在当前页面打开指定链接(默认是_blank;)
+*/
+
+			//返回值：
+			//返回新开页面的window对象；
+			var  opener = window.open();
+			alert(opener) // object window
+			alert(opener == window) // false
+			opener.document.documentElement.style.backgroundColor = "fb3";
+
+
+		}
+	</script>
+</body>
+</html>

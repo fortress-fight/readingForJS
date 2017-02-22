@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+body {
+	margin: 0;
+} 
+p {
+	margin: 0;
+	line-height: 30px;
+}
+#wrap {
+	width: 960px;
+	margin: 0 auto;
+}
+#leftBanner {
+	position: absolute;
+	width: 100px;
+	height: 300px;
+	background: red;
+}
+#rightBanner {
+	position: absolute;
+	width: 100px;
+	height: 300px;
+	background: green;
+}
+#backBtn {
+	position: fixed;
+	width: 30px;
+	height: 30px;
+	background: yellow;
+	right: 10px;
+	bottom: 10px;
+	display: none;
+}
+</style>	
+<script type="text/javascript">
+window.onload = function(){
+	var left = document.querySelector('#leftBanner');
+	var right = document.querySelector('#rightBanner');
+	var backBtn = document.querySelector('#backBtn');
+		left.style.left = 20 + "px";
+	var easeOut = function(t, b, c, d){
+		return -c *(t/=d)*(t-2) + b;
+	}
+	var timer = 0;
+	setRight();
+	setTop();
+	window.onscroll = setTop;
+	window.onresize = function(){
+		setRight();
+		setTop();
+	};
+	function setRight(){
+		right.style.left = document.documentElement.clientWidth - right.offsetWidth - 20 + "px";
+	}
+	function setTop(){
+		var top = (window.innerHeight - left.offsetHeight)/2;
+		if(window.pageYOffset >= top){
+			right.style.position = left.style.position = "fixed";
+			left.style.top = right.style.top = 0;
+			backBtn.style.display = "block";
+		} else {
+			right.style.position = left.style.position = "absolute";
+			left.style.top = right.style.top = top + 'px';
+			backBtn.style.display = "none";
+		}
+	}
+	backBtn.onclick = function(){
+		clearInterval(timer);
+		var target = 0;
+		var now = window.pageYOffset;
+		var dis =  target - now;
+		var t = 0;
+		var d = 20;
+		timer = setInterval(function(){
+			t++;
+			if(t>=d){
+				clearInterval(timer);
+			}
+			var top = easeOut(t,now,dis,d);
+			window.scrollTo(0,top);
+		},20);
+	};
+};
+</script>
+</head>
+<body>
+<div id="leftBanner"></div>
+<div id="rightBanner"></div>
+<div id="backBtn"></div>
+<div id="wrap"></div>
+<script type="text/javascript">
+var str = "";
+for(var i = 0; i < 100; i++){
+	str += "<p>页面内容"+i+"行</p>"
+}
+wrap.innerHTML += str;
+</script>
+</body>
+</html>

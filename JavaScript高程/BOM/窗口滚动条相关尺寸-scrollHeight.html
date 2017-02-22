@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 300px;
+			height: 2000px;
+			padding: 10px;
+			margin: 10px;
+			background-color: #58a;
+		}
+		body {
+			margin: 0;
+			border: 10px solid black;
+		}
+		html {
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div>div：height:2000px;padding:10px;border:10px;margin:10px;这里是为了撑开内容区域，让它出现滚动条，点击显示滚动条的scrollHeight</div>
+	<script>
+
+		// 滚动条相关尺寸：
+
+		document.onclick = function () {
+			var scrollT = document.documentElement.scrollHeight;
+			document.write(scrollT);
+		}
+
+	</script>
+</body>
+</html>

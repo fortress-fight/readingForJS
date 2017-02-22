@@ -132,7 +132,7 @@ if (re.test(str)) {
 `console.log(RegExp["$'"]);`
 `console.log(RegExp.rightContext); //  is a ball`
 
-5. leftContext -- $` -- lastMatch 之前的文本
+5. leftContext -- $\` -- lastMatch 之前的文本
 
 `console.log(RegExp['$`']);`
 `console.log(RegExp.leftContext); // t`

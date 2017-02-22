@@ -11,3 +11,7 @@
 var a = '12';
 console.log(+a); // 12
 console.log(typeof(+a)); // number
+
+console.log(undefined == null);
+console.log(String(undefined));
+console.log(String(null));
