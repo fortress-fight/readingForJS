@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function() {
+	
+	var oUl = document.getElementById('ul1');
+	/*
+		元素.firstChild : 只读 属性 第一个子节点
+			标准下：firstChild会包含文本类型的节点
+			非标准下：只包含元素节点
+		元素.firstElementChild : 只读 属性 标准下获取第一个元素类型的子节点
+	*/
+	
+	//alert( oUl.firstChild );
+	
+	//alert( oUl.firstElementChild );
+	
+	/*if ( oUl.firstElementChild ) {
+		oUl.firstElementChild.style.background = 'red';
+	} else {
+		oUl.firstChild.style.background = 'red';
+	}*/
+	
+	var oFirst = oUl.firstElementChild || oUl.firstChild;
+	oFirst.style.background = 'red';
+	
+	/*
+		元素.lastChild || 元素.lastElementChild 最后一个子节点
+	*/
+	var oLast = oUl.lastElementChild || oUl.lastChild;
+	oLast.style.background = 'yellow';
+	
+	/*
+		元素.nextSibling || 元素.nextElementSibling 下一个兄弟节点
+	*/
+	var oNext = oFirst.nextElementSibling || oFirst.nextSibling;
+	oNext.style.background = 'blue';
+	
+	/*
+		元素.previousSibling || 元素.previousElementSibling 上一个兄弟节点
+	*/
+	var oPrev = oLast.previousElementSibling || oLast.previousSibling;
+	oPrev.style.background = 'orange';
+	
+	
+}
+</script>
+</head>
+
+<body>
+	<ul id="ul1">
+        <li>11111</li>
+        <li>22222</li>
+        <li>33333</li>
+        <li>44444</li>
+    </ul>
+</body>
+</html>

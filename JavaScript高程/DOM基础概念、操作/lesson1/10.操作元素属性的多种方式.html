@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function() {
+	
+	var oText = document.getElementById('text1');
+	
+	/*
+	.
+	[]
+	*/
+	//oText.value = '222';
+	//alert( oText.value );
+	
+	//oText['value'] = '222';
+	//alert( oText['value'] );
+	
+	//var name = 'value';
+	
+	//oText.name; 有问题
+	//oText[name]; OK
+	
+	/*
+		元素.getAttribute(属性名称); 方法 获取指定元素的指定属性的值
+	*/
+	//alert( oText.getAttribute('value') );
+	
+	/*
+		元素.setAttribute(属性名称，属性值); 方法 给指定元素指定的属性设置值
+	*/
+	//oText.setAttribute( 'value', 'hello' );
+	
+	/*
+		元素.removeAttribute(属性名称); 方法 移除指定的元素的指定的属性
+	*/
+	//oText.removeAttribute( 'value' );
+	
+	/*
+		1.用.和[]的形式无法操作元素的自定义属性
+			getAttribute可以操作元素的自定义属性
+	*/
+	//alert( oText._name_ );
+	//alert( oText['_name_'] );
+	
+	//alert( oText.getAttribute('_name_') );
+	
+	var oImg = document.getElementById('img1');
+	/*
+		2.可以获取元素属性实际的值
+			ie7下还是会返回资源的绝对路径
+	*/
+	//alert( oImg.src );
+	//alert( oImg['src'] );
+	
+	//alert( oImg.getAttribute('src') );
+	
+	//alert( oImg.style.getAttribute('width') );
+	
+}
+</script>
+</head>
+
+<body>
+	<input type="text" id="text1" value="1111" _name_="妙味" />
+    <img src="bdlogo.gif" id="img1" style="width:100px;" />
+</body>
+</html>
