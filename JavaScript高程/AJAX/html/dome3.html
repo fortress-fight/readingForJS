@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (200 <= xhr.status && xhr.status < 300 || xhr.status === 304) {
+                alert(xhr.responseText);
+            } else {
+                alset(xhr.status);
+            }
+        }
+        xhr.onprogress = function(ev) {
+            var divStatus = document.getElementById("status");
+            if (ev.lengthComputable) {
+                divStatus.innerHTML = 'received' + ev.position + 'of' + event.totalSize + 'bytes';
+            }
+        }
+        xhr.open('GET', '...', true);
+        xhr.send(null)
+    </script>
+</body>
+
+</html>
