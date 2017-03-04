@@ -274,6 +274,9 @@ xhr.send(data)
 >注:
 实现表单序列化有很多种方法，可以通过jq 或者自己写一个处理的方法；
 
+例如：
+[Serialization](./html/FormSerializationExample01.htm)
+
 #### 21.5.2 超时设定
 
 xhr2 新添加了一个 timeout 属性，表示在请求多久后如果依旧没有得到相应就停止，并且触发 timeout 事件；
