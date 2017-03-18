@@ -109,7 +109,8 @@ console.log(re1.valueOf()); // /\d/g
 RegExp 构造函数包含了一些属性，返回最后一次正则表达式的相关信息；
 
 1. input -- $_ -- 最近一次要匹配的字符串
-```
+
+```js
 var re = /(.)s/g;
 var str = 'this is a ball';
 if (re.test(str)) {
@@ -117,6 +118,7 @@ if (re.test(str)) {
     console.log(RegExp.input); // this is a ball
 }
 ```
+
 2. lastMatch -- $& -- 最近一次匹配项
 
 `console.log(RegExp.lastMatch); // his`

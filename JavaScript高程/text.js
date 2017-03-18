@@ -25,7 +25,6 @@ function deepCopy (obj) {
   return newObj;
 }
 
-
 var obj = {
   name: 'ff',
   age: '24'

@@ -89,7 +89,6 @@ GET 请求是最常用的请求类型，__用于向服务器查询某些信息__
 
 #### post 的使用
 
-
 POST 请求 __通常用于向服务器发送需要储存的数据，__
 
 - post 的请求应该把数据作为请求的主题提交，
@@ -111,7 +110,7 @@ POST 请求 __通常用于向服务器发送需要储存的数据，__
 
     所以get方式通常用于获取服务端的信息
 
-2. post 是通过请求体发送信息的，比get方式要安全一些，主要用于修改服务端的信息 
+2. post 是通过请求体发送信息的，比get方式要安全一些，主要用于修改服务端的信息
 
     在使用post进行传输的时候，要为其设置请求头信息(在open之后，send之前)：
     `xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded")`;
@@ -305,7 +304,7 @@ xhr.timeout = 10000;
 xhr.ontimeout = function (){
     alert('to long')
 }
- 
+
 var data = new Form(form);
 
 xhr.send(data)
@@ -320,7 +319,6 @@ overrideMimeType -- 用于重写 XHR 响应的MIME类型；
 使用overrideMimeType可以解决这个问题；
 
 `overrideMimeType("text/xml")`
-
 
 ### 21.6 进度事件
 
@@ -381,4 +379,3 @@ xhr.onprogress = function(ev) {
 xhr.open('GET', '...', true);
 xhr.send(null)
 ```
-

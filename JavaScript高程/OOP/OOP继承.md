@@ -15,7 +15,7 @@ JavaScript不存在接口，所以只能实现继承，即通过原型继承属�
 
 实例：
 
-```
+```js
     <script>
         function SuperType () {
             this.property = true;
@@ -43,16 +43,17 @@ JavaScript不存在接口，所以只能实现继承，即通过原型继承属�
 
 补充：
 通过实现原型链，本质上是扩展了原型搜索机制，当以读取模式访问一个实例属性的时候，会通过以下步骤去查找：
+
 1. 在实例中搜索该属性，
 2. 搜索实例的原型
 3. 沿着原型链继续查找
 
 注意：
-- 这里由于getSubValue的原型对象指向了一个getSuperValue实例对象，所以constructor就是实例对象指针指向的getSuperValue的原型对象下的constructor，需要修正
 
+- 这里由于getSubValue的原型对象指向了一个getSuperValue实例对象，所以constructor就是实例对象指针指向的getSuperValue的原型对象下的constructor，需要修正
 - 如果在SuperType的原型对象下没有找到getSuperValue方法，那么就会沿着SuperType的原型对象下的指向其构造函数Object的指针，找到Object；
 
-```
+```js
     <script>
         function a () {
             this.name = 'xiao';
@@ -71,22 +72,23 @@ JavaScript不存在接口，所以只能实现继承，即通过原型继承属�
 
 从这里可以看到一个关系，所有的构造函数都是函数，但是所有的构造函数都是Object的
 但是：
-```
+
+```js
     alert(Object.prototype === Object.getPrototypeOf(Function)) // false
     alert(Object.prototype === Object.getPrototypeOf(Function.prototype)) // true
 ```
 
 解释：
+
 1. javascript中，“函数”（方法）也是对象。
-2. 一切对象都有一个根源。它是Object.prototype。
-根源之上再没有其他根源。Object.getPrototypeOf(Object.prototype)是null。js中除字面量以外的一切引用对象都来自这个“根源”对象。
+2. 一切对象都有一个根源。它是Object.prototype。根源之上再没有其他根源。Object.getPrototypeOf(Object.prototype)是null。js中除字面量以外的一切引用对象都来自这个“根源”对象。
 3. 表达式Object.getPrototypeOf(Function) === Function.prototype的结果是真。这是Function特有的。实际上Function的prototype是一个内置函数，一切函数都派生自这个内置函数，这个内置函数是一个函数工厂。这个内置函数对象的prototype指向“根源”对象。
 4. 表达式Object.prototype === Object.getPrototypeOf(Function.prototype)的结果是真。说明了Object跟Function二者之间的联系，是通过“根源”对象联系起来的。
-function Object 其他函数 都是由系统的内置函数构成，而内置函数由根源对象构成
 
+function Object 其他函数 都是由系统的内置函数构成，而内置函数由根源对象构成
 所以有时Function可能是指内置函数，Object可以说的是根源对象，才会有
 
-```
+```js
     alert(Object.prototype.isPrototypeOf(Function)) // ture
     alert(Function.prototype.isPrototypeOf(Object)) // ture
 ```
@@ -122,6 +124,7 @@ isPrototypeOf()
 #### 3.1.3 原型链的问题
 
 如果在原型链指向的原型对象中存在引用类型的变量，在继承时就会出现问题，
+
 1. 对继承的子对象的改变会影响继承的父级对象；
 2. 在创建子类型的实例的时候，不能像超类型（继承的父级）传递参数；
 
@@ -132,7 +135,8 @@ isPrototypeOf()
 构造函数创建的实例，实例的属性会创建一个副本，这样改变副本就不会对父类产生影响，但是只使用构造函数创建实例，就会导致代码没有复用性。将构造函数和原型继承组合起来，就可以解决这两个问题；
 
 实例：
-```
+
+```js
     <script>
         function a () {
             this.num = [1,2,3];
@@ -154,7 +158,8 @@ isPrototypeOf()
 ```
 
 借用构造函数传递参数
-```
+
+```js
     <script>
         function a (name) {
             this.name = name;
@@ -175,14 +180,12 @@ isPrototypeOf()
     </script>
 ```
 
-
 这种组合式继承同样具有缺陷：
-就是调用了两侧超类的构造函数--这时就要使用寄生组合式继承
-
+就是调用了两次超类的构造函数--这时就要使用寄生组合式继承
 
 ### 3.2 原型式继承
 
-```
+```js
     function object (o) {
         function F(){}
         F.prototype = o;
@@ -191,9 +194,9 @@ isPrototypeOf()
 ```
 
 创建一个新的构造函数，让构造函数指向实例，然后返回一个新的实例；这样就将原有对象的实例拷贝了一份
-
 实例：
-```
+
+```js
     <script>
         function object (o) {
             function F(){}
@@ -218,7 +221,7 @@ isPrototypeOf()
 
 ### 3.3 寄生式继承
 
-```
+```js
     <script>
         function object (o) {
             function F(){}
@@ -245,7 +248,7 @@ isPrototypeOf()
 
 ### 3.4 寄生组合式继承
 
-```
+```js
     function object (superType) {
         function F () {};
         F.prototype = superType;
@@ -261,7 +264,8 @@ isPrototypeOf()
 与书上有些出入，但是实验书本上并不能实现，其说的功能
 应该是出现了误印；
 实例1：
-```
+
+```js
     <script>
         function object (superType) {
             function F () {};
@@ -293,7 +297,8 @@ isPrototypeOf()
 ```
 
 实例2：
-```
+
+```js
 function object(o) {
     function F () {};
     F.prototype = o;
@@ -304,6 +309,7 @@ function inheritPrototype (subType, superType) {
     prototype.constructor = subType;
     subType.prototype = prototype;
 };
+
 function SuperType (name) {
     this.name = name;
     this.colors = ['red','blue']
@@ -333,19 +339,18 @@ console.log(sub.colors); //["red", "blue", "black"]
 console.log(sup.colors); // ["red", "blue"]
 ```
 
-
 补：
 对象构造函数（Object）为给定值创建一个对象包装器。如果给定值是  null or undefined，将会创建并返回一个空对象，否则，将返回一个与给定值对应类型的对象。
 当以非构造函数形式被调用时，Object 等同于 new Object()。
 
-总结：原型式继承不需要预先定义构造函数的情况下，实现浅复制；
+总结：
+原型式继承不需要预先定义构造函数的情况下，实现浅复制；
 寄生式继承，基于对象创建一个对象，然后为这个对象添加方法属性，然后返回，就是将添加的行为封装起来，但是不符合复用的原则，
 寄生组合式继承，集合寄生继承的优点 和 组合的优点，形成的一种继承的方法；
 
-
-
 补充：
-```
+
+```html
     <script>
         var a = [1,2,3]
         var b = a; // 猜测是将a挂在了b的原型连上了，当b找不到时，就找a，如果b找到了就不在找了
