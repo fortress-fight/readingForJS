@@ -4,6 +4,11 @@ JavaScript 相关书籍阅读笔记
 ## JavaScript 高程三
 
 读这本书，不需要原因；
+--- 高程三这本书囊括了js学习中的大多数知识，所以我打算以此为根基进行扩展，然后不断优化、增补，希望能够以此搭建自己的学习体系。
+
+### 21. Ajax 的学习 
+
+![Ajax](./JavaScript高程/AJAX/AJAX.png)
 
 ## JavaScript 设计模式与开发实践
 

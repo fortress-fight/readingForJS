@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    function trans (num) {
+      // var initNum = '0'.charCodeAt();
+      var initStr = 'A'.charCodeAt();
+      // var disInit = Math.abs(initNum - initStr);
+      var arr = [];
+      var str = '';
+      while (num > 26) {
+        num -= Number(26);
+        arr.push(26);
+      }
+
+      arr.push(num)
+      console.log(arr);
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] === 26 && i != arr.length-1) {
+          arr[i] = 1;
+        }
+        str +=  String.fromCharCode(initStr + arr[i] - 1)
+      }
+      console.log(str);
+      var a = document.querySelectorAll(selectors: string)
+    };
+    trans(28)
+  </script>
+</body>
+</html>

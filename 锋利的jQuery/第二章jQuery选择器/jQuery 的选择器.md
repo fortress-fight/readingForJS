@@ -10,7 +10,7 @@ jQuery 选择器 分为 基本选择器 || 层次选择器 || 过滤选择器 ||
 
 ## 1.1 基本选择器：
 
-$('#idSelector') || $('tagSelector') || $('classSelector') || $('*') || $('Selector1, Selector2')
+$('#idSelector') || $('tagSelector') || $('classSelector') || $('\*') || $('Selector1, Selector2')
 
 这一块很好理解 不做叙述
 
@@ -39,7 +39,7 @@ $('Selector:first') || $('Selector:last') || $('Selector:not(select)') || $('Sel
 
 $('Selector:gt(index)')： gt --- Greater than; 选择index前的所有元素(不包括index)
 $('Selector:lt(index)')： lt --- Less than; 选择index后的所有元素 (不包括index)
-$(':header')： 选择 h1 - h6 
+$(':header')： 选择 h1 - h6
 $(':animated')： 选择处于动画中的元素
 $(':focus')： 选择当前获取焦点的元素
 
@@ -58,12 +58,12 @@ $('Selector:hidden') 包括 hidden和display：none；
 
 ### 1.3.4 属性过滤选择器
 
-$('Selector[attr]') || $('Selector[attr = val]') || $('Selector[attr != val]') || $('Selector[attr ^= val]') || $('Selector[attr $= val]') || $('Selector[attr *= val]') || $('Selector[attr |= val]') || $('Selector[attr ~= val]') || `$('Selector[attr][attr2][attr3]....')`
+$('Selector[attr]') || $('Selector[attr = val]') || $('Selector[attr != val]') || $('Selector[attr ^= val]') || $('Selector[attr $= val]') || $('Selector[attr \*= val]') || $('Selector[attr |= val]') || $('Selector[attr ~= val]') || $('Selector[attr]\[attr2][attr3]....')
 
 $('Selector[attr ^= val]') 选取具有属性名attr并且该属性名下的属性值以val开头
 $('Selector[attr $= val]') 选取具有属性名attr并且该属性名下的属性值以val结尾
 
-$('Selector[attr *= val]') 选取具有属性名attr并且该属性名下的属性值包含val
+$('Selector[attr \*= val]') 选取具有属性名attr并且该属性名下的属性值包含val
 $('Selector[attr |= val]') 选取具有属性名attr并且该属性名下的属性值以val作为前缀的
 $('Selector[attr ~= val]') 选取具有属性名attr并且该属性名下的用空格分开的属性值中包含val的
 
