@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+<script>
+
+	var a = document.getElementsByTagName('li');
+	var b = document.createElement('div');
+	// alert(Object.prototype.toString.call(a))
+	var c = Array.prototype.slice;
+	// var a = [1,2];
+	c.call(a);
+	console.log(a)
+</script>
+</body>
+</html>

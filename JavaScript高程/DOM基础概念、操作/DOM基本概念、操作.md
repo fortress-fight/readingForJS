@@ -292,7 +292,7 @@ false -- 执行浅度复制，也就是只复制节点本身；
 
 
 
-
+offsetHeight
 
 
 # Document类型
