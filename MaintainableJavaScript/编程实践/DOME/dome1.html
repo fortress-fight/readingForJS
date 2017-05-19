@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="mylist">
+        <!--<li id="item%s"><a href="%s">%s</a></li>     -->
+    </ul>
+    <script>
+        var person = {
+            name: 'ff',
+            job: 'web',
+            obj: {
+                h: 100
+            },
+            sayName: function () {
+                alert(this.obj.h);
+            }
+        };
+
+        var myPerson = Object.create(person, {
+            name: {
+                value:'hh'
+            },
+            obj: {
+                h: 100
+            }
+        });
+        myPerson.age = 24;
+        // myPerson.obj.h = 15;
+        console.log(myPerson);
+        console.log(person);
+        myPerson.sayName()
+        person.sayName()
+    </script>
+</body>
+</html>
