@@ -833,35 +833,169 @@
            - 不能从 DOM 或者 BOM 中对对象进行继承；
            - 由于数组索引和 length 属性之间的复杂关系，导致继承数组对象是不能正常工作的；
 
-    4. 基于对象的继承
-        基于对象的继承又叫做原型继承，一个对象继承另一个对象是不需要使用构造函数的，通过 ECMS5 中的 Object.create() 就可以完成继承；
+        1. 基于对象的继承
+            基于对象的继承又叫做原型继承，一个对象继承另一个对象是不需要使用构造函数的，通过 ECMS5 中的 Object.create() 就可以完成继承；
 
-            ```js
-                var person = {
-                    name: 'ff',
-                    job: 'web',
-                    obj: {
-                        h: 100
-                    },
-                    say: function () {
-                        alert(this.obj.h);
+                ```js
+                    var person = {
+                        name: 'ff',
+                        job: 'web',
+                        say: function () {
+                            alert(this.name);
+                        }
+                    };
+
+                    var myPerson = Object.create(person, {
+                        name: {
+                            value:'hh'
+                        },
+                    });
+                    myPerson.age = 24;
+                    console.log(myPerson);
+                    console.log(person);
+                    myPerson.say()
+                    person.say()
+                ```
+
+            Object.create 可以传入两个参数，1. 一个要被继承的对象。 2. 一个自定义的属性（可选）；
+
+            - 注：
+                1. 在添加自定义属性的时候，必须是对象形式，其中 value 代表这个属性的值；
+                2. Object.create 的继承方式，是将子对象的原型设置为了父对象，如果子对象上存在查找属性，那么就不会沿着原型链继续查找父对象了，
+                    ![](.\2017-05-20-15-57-10.png)
+
+            - Object.create 的实现：
+
+                    ```js
+                        var createObj = function (obj) {
+
+                            var F = function (){};
+                            F.prototype = obj;
+
+                            return new F;
+                        }
+                    ```
+            当他人的对象被你继承过来以后，就可以算是你的私有对象了，你可以再这个对象上进行修改；
+
+        2. 基于类型的继承
+            基于类型的继承依赖原型，基于类型的继承是通过构造函数实现的，也就是说这种继承方式是需要访问继承对象的构造函数；
+
+                ```js
+                    function MyError(message) {
+                        this.message = message;
                     }
-                };
 
-                var myPerson = Object.create(person, {
-                    name: {
-                        value:'hh'
-                    },
-                    obj: {
-                        h: 100
+                    MyError.prototype = new Error(); // 原型继承；
+                ```
+            对一个定义了构造函数产生的对象，使用类型继承的方式会更加合适；
+            类型的继承分为两步：1. 原型继承； 2. 构造器继承
+
+            构造器继承制调用超类的够着函数时传入新建的对象作为其this的值；示例：
+
+                ```js
+                    function Person(name) {this.name = 'ff'};
+
+                    Person.prototype = {
+                        constructor: Person,
+                        say: function () {
+                            alert(this.name)
+                        }
+                    };
+
+                    function Author(name) {
+                        Person.call(this, name); // 构造器继承
                     }
-                });
-                myPerson.age = 24;
-                // myPerson.obj.h = 15;
-                console.log(myPerson);
-                console.log(person);
-                myPerson.say()
-                person.say()
-            ```
 
-        使用 Object.create 首先
+                    Author.prototype = new Person(); // 类型继承
+                ```
+            Author 继承自 Person，属性 name 实际上是由 Person 管理的，所以需要通过 Person.call 的方式为 Author 添加属性；
+            Person 构造器是在 this 上执行的，this 指向一个 Author 对象，所以最终的 name 属性定义在了 Author 上;
+
+            基于类型的继承在创建新对象的时候更加的灵活，定义了一个类型可以让你创建多个实例对象；所有的对象都是继承自一个通用的超类，新的类型应该明确定义需要使用的属性和方法，并且它们应该与超类中的完全不同；
+
+        3. 门面模式
+
+            门面模式是一种设计模式，它会为一个已经存在的对象创建一个新的接口，门面是一个全新的对象，背后有一个已经存在的对象在工作，门面有时也叫作包装器，它用不同的接口包装已经存在的包装器；从而为原来的对象添加或改写功能；
+
+            门面模式适用于不能继承的对象，例如 DOM对象，BOM对象；
+
+            实例：
+
+                ```js
+                    function DOMWrapper(element) {
+                        this.element = element;
+                    }
+
+                    DOMWrapper.prototype = {
+                        constructor: DOMWrapper,
+                        addClass: function (className){
+                            this.element.className += ' ' + className;
+                        },
+                        remove: function() {
+                            this.element.parentNode.removeChild(this.element);
+                        }
+                    };
+
+                    var wrapper = new DOMWrapper(document.getElementById('my-div'));
+
+                    wrapper.addClass('selected');
+                    wrapper.remove();
+                ```
+
+            通过门面模式穿件出来的对象，本身依旧是属于 DOM 对象，可以使用 DOM 对象的方法和属性，但是又在原来的基础上添加了新的方法：addClass 和 remove；并且这两个方法是简历在包装对象上的，并不会对原有的 DOM 对象产生影响，即使在将来 DOM 对象添加了同样命名的这两个方法，也不会有包装对象产生影响，也就是说底层对象无论如何改变，只要修改门面。应用程序就能够继续正常工作；
+
+            门面模式还有一个好处：屏蔽了开发者对于对象的访问，比如说上例中的 remove 方法就屏蔽了开发者对于该元素的父级节点的访问；
+
+        4. 关于 Polyfill 的注解
+
+            [polyfill -- GitHub](https://github.com/GoogleChrome/dialog-polyfill)
+
+            Polyfill 是对某种功能的模拟（包含 css 以及 js 的新功能的实现）；当所使用的浏览器对于标准中的某些功能不支持的使用，Polyfill 会通过自己的方式实现这些功能；
+
+            - 缺点：
+                1，Polyfill 所实现的功能相较于标准可能并不精确；
+                2. Polyfill 是在原生的对象上去增加方法会有一定的危险性；
+
+            - 注：
+                1. 书中并不建议使用 Polyfill，而是建议使用门面模式在原来功能的基础上添加方法，这样会更加的灵活；
+                2. 我觉得 Polyfill 会是一个了解标准功能实现方式的途径；有兴趣的可以了解一下;
+
+        5. 阻止修改
+            在 ES5 中，引入了几个方法来防止对对象的修改，（IE浏览器中IE9+ 才能支持）
+
+            阻止修改又可以分为 3 种锁定类型，每种锁定的类型都具有两个方法：一个用来实时操作，另一个用来检测是否应用了相应的操作
+
+            1. 防止扩展
+                禁止添加，但是可以对因存在的修改和删除
+                通过 Object.preventExtension() 进行锁定，通过 Object.isExtensible() 来判断是否已经锁定了；
+                示例：
+
+                    ```js
+                        var person = {
+                            name: 'ff'
+                        }
+
+                        Object.preventExtensions(person);
+                        console.log(Object.isExtensible(person)); // false
+                        person.age = '24'
+                        console.log(person) // {name:ff}
+                    ```
+                在非严格的模式下，不会报错，也不会生效；
+
+            2. 密封
+                禁止添加删除，但可以修改
+                通过 Object.seal() 进行锁定，通过 Object.isSealed() 判断是否已经锁定
+                使用方式和 Object.preventExtensions() 差不多，不再介绍
+
+            3. 冻结
+                禁止添加删除以及修改，所有的属性和方法只读
+                通过 Object.freeze() 进行锁定，通过 Object.isFrozen() 进行判断；
+
+            这些锁定的方式，可以阻止别人修改你的代码，但是由于在非严格的模式下，修改失效不会有任何提示，所有建议在使用锁定后，代码最后运行在严格模式下；
+
+            需要注意的是，一个对象一旦锁定了，就不能解锁；
+
+12. 浏览器嗅探
+
+    1. User-Agent 检测
+        
