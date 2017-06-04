@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		var  arr = [1,9,23,2,43,4];
+		arr.sort();
+		console.log(arr);  // [1, 2, 23, 4, 43, 9]
+
+		arr.sort(function (a, b) {
+			return a-b;
+		})
+		console.log(arr); // [1, 2, 4, 9, 23, 43]
+
+		arr.sort(function (a, b) {
+			return b - a;
+		})
+		console.log(arr); // [43, 23, 9, 4, 2, 1]
+	</script>
+</body>
+</html>

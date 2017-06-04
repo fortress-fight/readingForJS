@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#box1,
+	#box2 {
+		
+		position: relative;
+	}
+		#box1 {
+			width: 300px;
+			height: 400px;
+			
+			position: absolute;
+			top: 0;
+			left: 500px;
+			background: #58a;
+		}
+		#box2 {
+			width: 200px;
+			height: 200px;
+			background: #fb3;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1">
+		<div id="box2"></div>
+	</div>
+	<script>
+		var box1 = document.getElementById('box1');
+		var box2 = document.getElementById('box2');
+
+
+		box2.onclick = function (ev) {
+			// ev.cancelBabble = true;
+			alert(this.id)
+		}
+
+		box1.onclick = function (ev) {
+			ev.cancelBabble = true;
+			alert(this.id)
+		}
+	</script>
+</body>
+</html>

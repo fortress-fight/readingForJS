@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        (function() {
+            var privateVariable = '';
+            window.MyObject = function () {
+                privateVariable = 10;
+            }
+            MyObject.prototype = {
+                construct: MyObject,
+                publicMethod: function () {
+                    privateVariable ++;
+                    return this.privateFunction();
+                },
+                privateFunction: function () {
+                    return privateVariable
+                }
+            }
+        })()
+        var a = new MyObject();
+        var b = new MyObject();
+        console.log(a.publicMethod()); // 11
+        console.log(b.publicMethod()); // 12
+        console.log(a.publicMethod()); // 13
+    </script>
+</body>
+</html>

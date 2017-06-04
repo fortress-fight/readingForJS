@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        console.log(navigator);
+        window.online = function () {
+            alert('链接上了网络')
+        }
+        window.offline = function () {
+            alert('退出了网络')
+        }
+
+        window.addEventListener('online', function () {
+            alert('链接上了网络')
+        })
+        window.addEventListener('offline', function () {
+            alert('退出了网络')
+        })
+    </script>
+</body>
+</html>

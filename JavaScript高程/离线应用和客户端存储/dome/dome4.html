@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body,html {
+            margin: 0;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript">
+        document.addEventListener('stroage', function(ev){
+            console.log(ev);
+            alert(1)
+        })
+        localStorage.setItem('getTime', '2017')
+        localStorage.clear()
+    </script>
+</body>
+
+</html>

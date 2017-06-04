@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var book = {
+			"title": "a book",
+			"authors": [
+				"小米"
+			],
+			"edition": 4,
+			"year": 2011,
+			"toJSON": function () {
+				return this.title;
+			}
+		}
+
+		/*var jsonText = JSON.stringify(book);
+		console.log(jsonText) //"a book"*/
+
+		var jsonText = JSON.stringify(book, function (key, value) {
+			return value + '过滤';
+		});
+		console.log(jsonText) //"a book过滤"
+	</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function c (a) {
+  }
+  c.prototype.b = 'a';
+
+  var d = new c;
+  d.name = 1;
+
+  alert(c.prototype.isPrototypeOf(d))
+
+  for (attr in d) {
+    alert(d.hasOwnProperty(attr))
+    if (d.hasOwnProperty(attr)) {
+      console.log(attr) // name
+    }
+  }
+</script>
+</body>
+</html>

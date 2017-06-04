@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var setEvent =(function (obj){
+            var ev = {
+                clientList: {},
+                listen: function (key, fn){
+                    if (!this.clientList[key]) {
+                        this.clientList[key] = [];
+                    }
+                    this.clientList[key].push(fn)
+                },
+                trigger: function (){
+                    var key = Array.prototype.shift.call(arguments),
+                        fns = this.clientList[key];
+
+                    if (!fns || fns.length === 0) {
+                        return false;
+                    }
+
+                    for (var i = 0, fn; fn = fns[i++];) {
+                        fn.apply(this, arguments);
+                    }
+                }
+            }
+            var installEvent = function (obj) {
+                for (var i in ev) {
+                    if (ev.hasOwnProperty(i)) {
+                        obj[i] = ev[i]
+                    }
+                }
+            }
+            return installEvent;
+        })();
+
+        // ----------------测试
+        var salesOffices = {};
+        setEvent(salesOffices);
+
+        salesOffices.listen('xiaom', function (price){
+            console.log('订阅88:' + price);
+        })
+        salesOffices.listen('xiaob', function (price){
+            console.log('订阅99:' + price);
+        })
+
+        salesOffices.trigger('xiaom', '5000')
+        salesOffices.trigger('xiaob', '2000')
+    </script>
+</body>
+</html>

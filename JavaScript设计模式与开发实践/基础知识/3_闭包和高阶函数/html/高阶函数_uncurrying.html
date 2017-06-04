@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		/*var obj1 = {
+			name: 'seven'
+		};
+		var obj2 = {
+			sayName: function (){
+				alert(this.name)
+			}
+		};
+
+		obj2.sayName.call(obj1) // seven*/
+
+		/*;(function(){
+			Array.prototype.push.call(arguments, 4); // [1, 2, 3, 4]
+			console.log(arguments)
+		})(1,2,3);*/
+
+		Function.prototype.uncurrying = function(){
+			var _this = this;
+			return function () {
+				// 去提取参数中的第一位，也就是要操作的参数
+				var obj = Array.prototype.shift.call(arguments);
+				console.log(obj)
+				return _this.apply(obj, arguments);
+			}
+		};
+
+		var push = Array.prototype.push.uncurrying();
+
+		;(function(){
+			push(arguments, 5);
+			console.log(arguments) / [1,2,3,4,5]
+		})(1,2,3,4);
+	</script>
+</body>
+</html>

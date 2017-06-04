@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="打开新窗口">
+	<input type="button" value="关闭窗口">
+	<input type="button" value="关闭新窗口">
+	<script>
+		var aBtn = document.getElementsByTagName("input");
+		var opener;
+		aBtn[0].onclick = function () {
+/*
+			//----- open ---------
+			// 功能：
+			// 打开空白页：
+			open();
+			//打开指定链接
+			open('http://www.baidu.com');
+			//在当前页面打开指定链接(默认是_blank;)
+			open('http://www.baidu.com','_self');
+*/
+
+			//返回值：
+			//返回新开页面的window对象；
+			opener = window.open();
+//			alert(opener) // object window
+//			alert(opener == window) // false
+			opener.document.documentElement.style.backgroundColor = "fb3";
+
+
+		}
+
+		//----- close ---------
+
+		aBtn[1].onclick = function () {
+
+			//关闭当前选项卡的窗口
+			window.close();
+			/*
+				注：这里的window存在兼容性的问题：
+				在ff：无法关闭；
+				在chrome：直接关闭；
+				在IE：中询问用户；
+
+			 */
+
+		}
+		// 关闭通过当前window创建的窗口，
+		aBtn[2].onclick = function () {
+			opener.close();
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	var a = new Array;
+	Array.prototype.show = function(){
+		alert('array')
+	};
+	Object.prototype.show = function () {
+		alert('object')
+	}
+	Function.prototype.show = function(){
+		alert("function")
+	};
+
+	a.show();
+	Array.show()
+
+	console.dir(Array)
+	</script>
+</body>
+</html>

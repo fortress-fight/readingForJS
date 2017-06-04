@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			height: 2000px;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		document.onmousewheel = fn;
+		if (addEventListener) {
+			document.addEventListener('DOMMouseScroll', fn, false);
+		}
+		// 如果fn 返回ture 则是向上滚动 返回false 就是向下滚动
+		function fn (ev) {
+			var ev = ev || window.event;
+			var b = true;
+
+			if (ev.wheelDelta) {
+				b = ev.wheelDelta > 0 ? true : false;
+			} else {
+				b = ev.detail < 0 ? true : false;
+			}
+
+			console.log(ev.wheelDelta,b)
+
+			if (b) {
+				console.log('正在向上滚动');
+			} else {
+				console.log('正在向下滚动');
+			}
+		}
+	</script>
+</body>
+</html>

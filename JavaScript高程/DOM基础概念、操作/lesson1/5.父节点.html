@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function() {
+	
+	var aA = document.getElementsByTagName('a');
+	
+	for (var i=0; i<aA.length; i++) {
+		
+		aA[i].onclick = function() {
+			
+			/*
+				元素.parentNode : 只读 属性 当前节点的父级节点
+			*/
+			
+			this.parentNode.style.display = 'none';
+			
+			
+		}
+		
+	}
+	
+	
+}
+</script>
+</head>
+
+<body>
+	<ul id="ul1">
+        <li>11111 <a href="javascript:;">隐藏</a></li>
+        <li>22222 <a href="javascript:;">隐藏</a></li>
+        <li>33333 <a href="javascript:;">隐藏</a></li>
+        <li>44444 <a href="javascript:;">隐藏</a></li>
+    </ul>
+</body>
+</html>

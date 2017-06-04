@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function a () {
+			this.name = 'xiao';
+		}
+		a.prototype.say = function(){
+			alert(this.name)
+		};
+		var b = new a;
+
+		/*alert(Function.prototype.isPrototypeOf(a)) // ture
+		alert(Object.prototype.isPrototypeOf(a)) // ture
+		alert(Object.prototype.isPrototypeOf(Function)) // ture
+		alert(Function.prototype.isPrototypeOf(Object)) // ture
+
+		alert(Object.getPrototypeOf(Object.prototype))// null*/
+
+		alert(Object.prototype === Object.getPrototypeOf(Function)) // false
+		alert(Object.prototype === Object.getPrototypeOf(Function.prototype)) // true
+	</script>
+</body>
+</html>

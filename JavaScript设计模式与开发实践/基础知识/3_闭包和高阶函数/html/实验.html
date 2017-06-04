@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		var timeChunk = function (ary, fn, count) {
+			var obj,
+				t,
+				len = ary.length;
+
+			var start = function () {
+				for (var i = 0; i < Math.min(count || 1, len); i++) {
+					obj = ary.shift();
+					fn(obj);
+				};
+			};
+
+			return function () {
+				t = setInterval(function () {
+					if (ary.length === 0) {
+						return clearInterval(t);
+					}
+					start();
+				}, 200);
+			};
+		};
+
+		var ary = [];
+		for (var i = 0; i < 1000; i++) {
+			ary.push(i);
+		};
+
+		var renderFriendList = timeChunk (ary, function (n) {
+			var div = document.createElement('div');
+			div.innerHTML = n;
+			document.body.appendChild(div);
+		}, 5)
+
+		renderFriendList();
+	</script>
+</body>
+</html>

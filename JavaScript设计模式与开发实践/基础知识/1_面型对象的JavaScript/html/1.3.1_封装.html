@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var myObj = (function () {
+			var _name = 'obj';
+			return {
+				getName: function () {
+					alert(_name);
+				}
+			}
+		})();
+		alert(myObj._name); // undefined
+		myObj.getName(); // obj
+	</script>
+</body>
+</html>

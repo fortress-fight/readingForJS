@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+body {
+	margin: 0;
+}
+.page{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	display: none;
+	opacity: 0;
+}
+.div1 {
+	background: red;
+}
+nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	background: #ccc;
+	width: 100%;
+	height: 40px;
+}
+#page1 {
+	width: 300px;
+	height: 200px;
+	background: green;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -100px 0 0 -150px;
+	color: #fff;
+}
+.div2 {
+	background: yellow;
+}
+#page2 {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -150px 0 0 -200px;
+	width: 400px;
+	height: 300px;
+	background: #eee;
+
+}
+.div3 {
+	background: #f60;
+}
+#page3 {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -200px 0 0 -300px;
+	width: 600px;
+	height: 400px;
+	background: yellow;
+}
+</style>
+<script type="text/javascript" src="miaov.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var page1 = document.querySelector('#page1');
+	var page2 = document.querySelector('#page2');
+	var page3 = document.querySelector('#page3');
+	var hash = "";
+	show();
+	css(page1,"translateX",-300);
+	css(page1,"opacity",0);
+	css(page2,"scale",0);
+	css(page2,"rotate",720);
+	css(page3,"translateY",-300);
+	css(page3,"scale",50);
+	css(page3,"opacity",0);
+	window.onhashchange = hide;
+	function hide(){
+		switch(hash){
+			case "#div1":
+				hide1();
+				break;
+			case "#div2":
+				hide2();
+				break;
+			case "#div3":
+				hide3();
+				break;
+			default :
+				hide1();		
+		};
+	}
+	function show(){
+		hash = window.location.hash;
+		switch(hash){
+			case "#div1":
+				show1();
+				break;
+			case "#div2":
+				show2();
+				break;
+			case "#div3":
+				show3();
+				break;
+			default :
+				show1();		
+		}
+	}
+	function show1(){
+		var page = document.querySelector('.div1');
+		page.style.display = "block";
+		mTween(page,{opacity:100},300,"easeOut",function(){
+			mTween(page1,{opacity:100,translateX:0},500,"easeOut");
+		});
+	}
+	function hide1(){
+		var page = document.querySelector('.div1');
+		mTween(page1,{opacity:0,translateX:-300},500,"easeOut",function(){
+			mTween(page,{opacity:0},300,"easeOut",function(){
+				page.style.display = "none";
+				show();
+			});
+		});
+		
+	}
+	function show2(){
+		var page = document.querySelector('.div2');
+		page.style.display = "block";
+		mTween(page,{opacity:100},300,"easeOut",function(){
+			mTween(page2,{scale:100,rotate:0},600,"easeOut");
+		});
+	}
+	function hide2(){
+		var page = document.querySelector('.div2');
+		mTween(page2,{scale:0,rotate:720},600,"easeOut",function(){
+				mTween(page,{opacity:0},300,"easeOut",function(){
+				page.style.display = "none";
+				show();
+			});
+		});
+		
+	}
+	function show3(){
+		var page = document.querySelector('.div3');
+		page.style.display = "block";
+		mTween(page,{opacity:100},300,"easeOut",function(){
+			mTween(page3,{translateY:0,scale:100,opacity:100},1200,"backOut");
+		});
+	}
+	function hide3(){
+		var page = document.querySelector('.div3');
+		mTween(page3,{translateY:-300,scale:50,opacity:0},300,"easeIn",function(){
+			mTween(page,{opacity:0},300,"easeOut",function(){
+				page.style.display = "none";
+				show();
+			});
+		});
+		
+	}
+};
+</script>
+</head>
+<body>
+<nav>
+	<a href="#div1">首页</a>
+	<a href="#div2">关于我们</a>
+	<a href="#div3">前端spa</a>
+</nav>	
+<div class="div1 page">
+	<div id="page1">这是第一个页面</div>
+</div>
+<div class="div2 page">
+	<div id="page2">这是第二个页面</div>
+</div>
+<div class="div3 page">
+	<div id="page3">这是第三个页面</div>
+</div>
+</body>
+</html>

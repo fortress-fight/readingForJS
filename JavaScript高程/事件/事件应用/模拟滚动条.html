@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#lineBar {
+			position: absolute;
+			top: 100px; left: 100px;
+			background: #ccc;
+			width: 20px;
+			height: 500px;
+		}
+		#bar {
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			top: 0; left: 0;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<div id="lineBar">
+		<div id="bar"></div>
+	</div>
+	<script>
+		var lineBar = document.getElementById('lineBar');
+		var bar = document.getElementById('bar');
+		var fTop = lineBar.offsetTop;
+		var fH = lineBar.offsetHeight;
+		bar.onmousedown = function (ev) {
+			var ev = ev || window.event;
+			var x = ev.clientX;
+			var y = ev.clientY;
+			var oT = bar.offsetTop;
+			var oH = bar.offsetHeight;
+			document.onmousemove = function (ev) {
+				var ev = ev || window.event;
+				if ( 0 < ev.clientY - (y - oT) && ev.clientY - (y - oT) <  fH - oH) {
+					bar.style.top = ev.clientY - (y - oT) + 'px';
+				}
+			}
+			document.onmouseup = function () {
+				document.onmousemove = document.onmouseup = null;
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 400px;
+			height: 100px;
+			border: 1px solid black;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<script>
+		var div = document.getElementsByTagName('div');
+		for (var i = 0; i < div.length; i++) {
+			;(function(index){
+				div[index].onclick = function () {
+					alert(index)
+				}
+			})(i);
+		}
+	</script>
+</body>
+</html>

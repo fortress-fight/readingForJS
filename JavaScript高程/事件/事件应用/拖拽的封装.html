@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		img {
+			position: absolute;
+			top: 0; left: 0;
+		}
+		#box {
+			position: absolute;
+			top: 0; left: 0;
+			width: 100px; height: 100px;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<img src="1.jpg" alt="">
+	<div id="box"></div>
+	<script src = "drag.js"></script>
+	<script>
+		var oImg = document.querySelector('img');
+		var oBox = document.querySelector('div');
+		drag (oImg);
+		drag (oBox);
+	</script>
+</body>
+</html>

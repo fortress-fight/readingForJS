@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var salesOffices = {}; // 定义发布者
+        salesOffices.clientList = []; // 定义缓存列表
+        salesOffices.listen = function (fn) {
+            salesOffices.clientList.push(fn)
+        }; // 定义一个接口，用于订阅者向发布者订阅信息；
+        salesOffices.trigger = function () {
+            for (var i = 0, fn; fn = this.clientList[i++];){
+                fn.apply(this, arguments)
+            }
+        }; // trigger 就是发布信息，其中arguments 就是订阅者和发布者之间的通讯信息
+
+        // --------------测试
+        // 小明订阅价格和面积
+        salesOffices.listen(function xiaoMing (price, squateMeter){
+            console.log('价格'+ price);
+            console.log('面积'+ squateMeter);
+        });
+        // 小明订阅价格
+        salesOffices.listen(function xiaoHong (price, squateMeter) {
+            console.log('价格' + price);
+        });
+        // 发布者发布信息
+        // ------------------测试一
+        // salesOffices.trigger('3000', '30')
+        // 价格3000 面积30 价格3000
+        // ------------------测试二
+        //
+    </script>
+</body>
+</html>

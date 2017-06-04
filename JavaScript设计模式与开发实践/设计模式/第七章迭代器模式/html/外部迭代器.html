@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.1.1.js"></script>
+</head>
+<body>
+	<script>
+/*
+		var arr1 = [1,2,3,4,5,6,7]
+		var arr2 = [1,2,3,4,5,6,7]
+		// var arr2 = [1,2,32,34,5,5,5]
+
+		function Iterator (obj) {
+			var current = 0;
+
+			var next = function () {
+				current ++;
+			}
+
+			var isDone = function () {
+				return current >= obj.length;
+			}
+
+			var getCurrItem = function () {
+				return obj[current];
+			}
+
+			return {
+				next: next,
+				isDone: isDone,
+				getCurrItem: getCurrItem,
+			}
+		}
+
+		var iArr1 = Iterator(arr1);
+		var iArr2 = Iterator(arr2);
+
+		var compare = function (arr1, arr2) {
+			while (!arr1.isDone() && !arr2.isDone())  {
+				if (arr1.getCurrItem() !== arr2.getCurrItem()) {
+					throw new Error('不相等')
+				}
+				arr1.next();
+				arr2.next();
+			}
+			alert('相等')
+		}
+
+		compare(iArr1, iArr2);
+*/
+
+	
+		var arr1 = [1,2,3,4,5,6,7]
+		// var arr2 = [1,2,3,4,5,6,7]
+		var arr2 = [1,2,32,34,5,5,5]
+
+		function Iterator (obj) {
+			var current = 0;
+
+			var next = function () {
+				current++;
+			}
+
+			var currentItem = function () {
+				return obj[current]
+			}
+
+			var isDone = function () {
+				return current >= obj.length;
+			}
+
+			return {
+				next: next,
+				currentItem: currentItem,
+				isDone: isDone
+			}
+		}
+
+		var iArr1 = Iterator(arr1);
+		var iArr2 = Iterator(arr2);
+
+		var compare = function (arr1, arr2) {
+			while (!arr1.isDone && !arr2.isDone) {
+				if (arr1.getCurrItem() !== arr2.getCurrItem()) {
+					throw new Error('不相等')
+				}
+				arr1.next();
+				arr2.next();
+			}
+			alert('相等')
+		}
+
+		compare(iArr1, iArr2)
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		;(function(){
+			Array.prototype.push.call(arguments, 3);
+			console.log(arguments) // 1 2 3
+			[].call(arguments, 3);
+			console.log(arguments) // 1 2 3
+		})(1,2);
+	</script>
+</body>
+</html>

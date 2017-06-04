@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 <script>
+        function a () {
+            this.num = [1,2,3];
+        }
+        a.prototype.say = function(){
+            alert(this.num)
+        };
+        function b () {
+            a.call(this);
+        }
+        b.prototype = new a();
+        var c = new a;
+        var d = new b;
+
+        d.num.push(4);
+        console.log(c.num) // 123
+        console.log(d.num) // 1234
+    </script>
+</body>
+</html>

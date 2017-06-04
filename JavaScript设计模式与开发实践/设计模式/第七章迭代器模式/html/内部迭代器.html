@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.1.1.js"></script>
+</head>
+<body>
+	<script>
+
+		var arr1 = [1,2,3,4,5,6,7]
+		var arr2 = [1,2,32,34,5,5,5]
+
+		function each (arr, callback) {
+			for (var i = 0; i < arr.length; i++) {
+				callback.call(arr[i], i, arr[i]);
+			}
+		}
+
+		/*each(arr, function (i, n) {
+			console.log('当前项的下标:' + i);
+			console.log('当前项:' + n);
+		})*/
+
+
+		function compare (arr1, arr2) {
+			if (arr1.length !== arr2.length) {
+				throw new Error ('它们不相等')
+				return false;
+			}
+			each(arr1, function (n, i) {
+				if (n != arr2[i]) {
+					throw new Error ('它们不相等')
+					return false;
+				}
+			})
+			alert('它们相等');
+		}
+
+		compare(arr1, arr2)
+
+	</script>
+</body>
+</html>

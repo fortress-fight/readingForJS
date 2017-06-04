@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function fn (num) {
+			if (num <= 1) {
+				return 1;
+			} else {
+				return num * fn(num-1);
+			}
+		}
+
+		var a = fn(10);
+		alert(a)
+	</script>
+</body>
+</html>

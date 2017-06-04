@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var book = {
+			_year: 2001
+		};
+
+		Object.defineProperties(book, {
+			name: {
+				value: 'name'
+			},
+			reader: {
+				value: 'people'
+			},
+			year: {
+				get: function () {
+					return this._year + 10;
+				},
+				set: function (value) {
+                    this._year = value + 'set'; // 这里只能修改写在字面量里的属性，
+                    this.name = value + '不能修改'; // 不能修改数据类型设定的属性
+                }
+			}
+		});
+
+		alert(book.name) // name
+		alert(book.year) // 2011
+		book.year = 100;
+		alert(book.name) // name
+		alert(book._year) //100set
+	</script>
+</body>
+</html>

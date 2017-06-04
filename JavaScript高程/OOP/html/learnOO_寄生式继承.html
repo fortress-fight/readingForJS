@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+    <script>
+         function object (o) {
+            function F(){}
+            F.prototype = o;
+            return new F();
+        }
+        function createAnother (o) {
+            var clone = object(o);
+            clone.sayHi = function () {
+                alert('hi')
+            }
+            return clone;
+        }
+
+        var a = [1,3,4]
+        var b = createAnother(a);
+        b.push(9);
+        alert(b)
+        alert(a)
+    </script>
+</body>
+</html>

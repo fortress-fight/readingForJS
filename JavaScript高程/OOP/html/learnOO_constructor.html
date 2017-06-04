@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function CreatePerson (name) {
+			this.name = name;
+			this.showName = function () {
+				alert(this.name)
+			}
+		}
+
+		var person1 = new CreatePerson('小白');
+		var person2 = new CreatePerson('小黑');
+		person1.showName()
+		person2.showName()
+
+		console.log(person1.constructor); // function CreatePerson(){};
+		console.log(person1.constructor == CreatePerson); // true;
+
+
+		console.log("address")
+	</script>
+</body>
+</html>

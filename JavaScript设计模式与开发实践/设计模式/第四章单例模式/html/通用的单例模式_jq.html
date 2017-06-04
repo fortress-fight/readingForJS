@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jquery-3.1.1.js"></script>
+</head>
+<body>
+	<button id="loginBtn">登录</button>
+	<script>
+		// 职责：检测
+		var getSingle = function (fn) {
+			var result;
+			return function () {
+				return result || (result = fn.apply(this, arguments))
+			}
+		};
+
+		var bindEvent = getSingle(function () {
+			$(document).click(function () {
+				alert(1);
+			})
+			// 这一步就保证了 result 存在，这样就不会走fn.apply了，如果没有返回那么就会不断地调用fn.apply
+			return true;
+		});
+
+		var rend = function () {
+			console.log('宣言')
+			bindEvent();
+		}
+
+		rend()
+		rend()
+		rend()
+	</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var say = function (animal) {
+			if (animal instanceof Duck) {
+				alert('duck')
+			} else if (animal instanceof Chicken) {
+				alert('chicken')
+			}
+		}
+
+		var Duck = function () {};
+		var Chicken = function () {};
+
+		say (new Duck);
+		say (new Chicken);
+		console.log('adress')
+	</script>
+</body>
+</html>

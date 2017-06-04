@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var Flower = function () {
+		}
+
+		var xiaoming = {
+			sendFlower: function (target) {
+				target.receiverFlower();
+			}
+		}
+
+		var daili = {
+			receiverFlower: function (flower) {
+				A.haveFun(function () {
+					var flower = new Flower;
+					A.receiverFlower(flower)
+				})
+			}
+		}
+		var A = {
+			haveFun: function (fn) {
+				setTimeout(function () {
+					fn()
+				}, 1000)
+			},
+			receiverFlower: function (flower) {
+				console.log('flower')
+			}
+		}
+
+		xiaoming.sendFlower(daili);
+	</script>
+</body>
+</html>

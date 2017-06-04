@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        const getQueryStringArgs = () => {
+            const Qs = location.search.length == 0 ? '' : location.search.substring(1);
+            let items = Qs.length ? Qs.split('&') : [],
+                args = {},
+                item = null,
+                name = null,
+                value = null;
+
+            console.log(items);
+            for (var i = 0; i < items.length; i++) {
+                item = items[i].split('=');
+                name = decodeURIComponent(item[0]);
+                value = decodeURIComponent(item[1]);
+                args[name] = value;
+            }
+            return args;
+        }
+    </script>
+</body>
+</html>

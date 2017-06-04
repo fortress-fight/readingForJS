@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 200px;
+			height: 200px;
+			background: #58a;
+			position: absolute;
+			top: 0; left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<script>
+		var oBox = document.querySelector('div');
+
+		start(oBox);
+		
+		function start (obj) {
+			obj.onmousedown = function (ev) {
+				var ev = ev || window.event;
+				var x = ev.clientX;
+				var y = ev.clientY;
+				var W = obj.offsetWidth;
+				var H = obj.offsetHeight;
+				var L = obj.offsetLeft;
+				var T = obj.offsetTop;
+				document.onmousemove = function (ev) {
+					var ev = ev || window.event;
+
+					if ((L + W - x) < 20 || (x - L) < 20 || (y - T) < 20 || (T + H - y) < 20) {
+						if ((L + W - x) < 20) {
+							obj.style.width = Math.max(25, W + ev.clientX - x) + 'px';
+						}
+
+						if ((x - L) < 20) {
+							obj.style.left = Math.min(L + W - 25, L - (x - ev.clientX)) + 'px';
+							obj.style.width = Math.max( 25, W + x - ev.clientX) + 'px';
+						}
+						if ((y - T) < 20) {
+							obj.style.top = Math.min(T + H -  25, T - (y - ev.clientY)) + 'px';
+							obj.style.height = Math.max( 25, H + y - ev.clientY) + 'px';
+						}
+						if ((T + H - y) < 20) {
+							obj.style.height = Math.max(25, H + ev.clientY - y) + 'px';
+						}
+						return
+					}
+
+					var targetL = L + (ev.clientX - x);
+					var targetT = T + (ev.clientY - y)
+
+					if (targetL < 20) {
+						targetL = 0;
+					}
+					if (targetT < 20) {
+						targetT = 0;
+					}
+
+					if (targetL > window.innerWidth - W - 20) {
+						targetL = window.innerWidth - W;
+					}
+					if (targetT > window.innerHeight - H - 20) {
+						targetT = window.innerHeight - H;
+					}
+
+					obj.style.left = targetL + 'px';
+					obj.style.top = targetT + 'px';
+
+					if (obj.setCapture) {
+						obj.setCapture();
+					}
+
+					return false;
+				}
+				document.onmouseup = function () {
+					if (obj.releaseCapture) {
+						obj.releaseCapture();
+					}
+					document.onmousemove = document.onmouseup = null;
+				}
+			}
+		}
+	</script>
+</body>
+</html>

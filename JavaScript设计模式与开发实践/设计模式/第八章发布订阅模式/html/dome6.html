@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var setEvent =(function (obj){
+            var ev = {
+                clientList: {},
+                listen: function (key, fn){
+                    if (!this.clientList[key]) {
+                        this.clientList[key] = [];
+                    }
+                    this.clientList[key].push(fn)
+                },
+                trigger: function (){
+                    var key = Array.prototype.shift.call(arguments),
+                        fns = this.clientList[key];
+
+                    if (!fns || fns.length === 0) {
+                        return false;
+                    }
+
+                    for (var i = 0, fn; fn = fns[i++];) {
+                        fn.apply(this, arguments);
+                    }
+                },
+                remove: function (key, fn){
+                    var fns = this.clientList[key];
+                    if (!fns) {
+                        return false;
+                    }
+                    if (!fn) {
+                        fns && (fns.length = 0);
+                    } else {
+                        for (var l = fns.length-1; l>=0; l--) {
+                            var _fn = fns[l];
+                            if (_fn === fn) {
+                                fns.splice(l, 1);
+                            }
+                        }
+                    }
+                }
+            };
+            var installEvent = function (obj) {
+                for (var i in ev) {
+                    if (ev.hasOwnProperty(i)) {
+                        obj[i] = ev[i]
+                    }
+                }
+            }
+            return installEvent;
+        })();
+
+        // ----------------测试
+        var logIn = {};
+        setEvent(logIn);
+        // 这里的ajax 只是意思意思
+        $.ajax('http:.........', function(){
+            logIn.trigger('logInSuc', data);
+        });
+
+        // 这里将 header 和 nav 使用了模块化 更容易维护
+        var header = (function () {
+            logIn.listen('logInSuc', function(data) {
+                header.serAvatar( data.avatar)
+            });
+            return {
+                setAvatar: function (data) {
+                    console.log(data);
+                }
+            };
+        });
+        var nav = (function () {
+            logIn.listen('logInSuc', function(data) {
+                nav.setNav( data.nav)
+            });
+            return {
+                setNav: function (data) {
+                    console.log(data);
+                }
+            };
+        });
+    </script>
+</body>
+</html>

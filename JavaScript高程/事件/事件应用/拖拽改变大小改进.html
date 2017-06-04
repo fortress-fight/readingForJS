@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box {
+			position: absolute;
+			top: 150px; left: 150px;
+			width: 200px;
+			height: 200px;
+			background: #58a;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+		var oBox = document.getElementById('box');
+		dragChange(oBox);
+		function dragChange (obj) {
+			/*
+			1. 鼠标点击事件
+			 */
+			obj.onmousedown = function (ev) {
+				/*
+				1.1获取鼠标点击时的坐标
+				 */
+				var ev = ev || window.event;
+				var x = ev.clientX;
+				var y = ev.clientY;
+				/*
+				1.2获取目标元素的相关尺寸
+				 */
+				var oW = obj.offsetWidth; //目标元素的宽度
+				var oH = obj.offsetHeight; //目标元素的高度
+				var oT = obj.offsetTop; //目标元素距离定位父级的Top
+				var oL = obj.offsetLeft; //目标元素距离定位父级的Left
+				/*
+				1.3获取鼠标相对于目标元素的位置
+				 */
+				var L = x - oL; // left
+				var T = y - oT; // top
+				var R = oW - L; // right
+				var B = oH - T; // bottom
+
+				/*
+				1.4用于存放数据
+				 */
+				var targetT = 0;
+				var targetL = 0;
+				/*
+				2.鼠标按下的事件
+				 */
+				document.onmousemove = function (ev) {
+					/*
+					2.1事件发生的条件，只有在宽高大于20的时候才会发生
+					 */
+					if (obj.offsetWidth > 20 && obj.offsetHeight >20) {
+						/*
+						2.2设置宽高的尺寸以及最低限制
+						 */
+						if (R < 20) {
+							obj.style.width = Math.max(25, (ev.clientX - x + oW)) + 'px';
+						}
+						if (B < 20) {
+							obj.style.height = Math.max(25, (ev.clientY - y + oH)) + 'px';
+						}
+						if (T < 20) {
+							obj.style.top = Math.min(oH + oT -25, oT + (ev.clientY - y)) + 'px';
+							obj.style.height = Math.max(25, (y - ev.clientY + oH))+ 'px';
+						}
+						if (L < 20) {
+							obj.style.width = Math.max(25,(x - ev.clientX + oW)) + 'px';
+							obj.style.left = Math.min(oW + oL - 25, oL + (ev.clientX - x)) + 'px';
+						}
+						/*
+						2.3当鼠标点击在其它区域是让他控制方块移动
+						 */
+						if (R >= 20 && B >= 20 && T >= 20 && L >= 20) {
+							targetT = ev.clientY - T < 50 ? 0 : (ev.clientY - T);
+							targetL = ev.clientX - L < 50 ? 0 : (ev.clientX - L);
+							if (targetT > window.innerHeight - oH - 50) {
+								targetT = window.innerHeight - oH;
+							}
+							if (targetL > window.innerWidth - oW - 50) {
+								targetL = window.innerWidth - oW;
+							}
+							obj.style.top = targetT + 'px';
+							obj.style.left = targetL + 'px';
+						}
+
+					}
+				}
+				document.onmouseup = function (){
+					document.onmousemove = document.onmouseup = null;
+				}
+			}
+		}
+	</script>
+</body>
+</html>

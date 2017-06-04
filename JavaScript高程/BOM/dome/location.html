@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" value="窗口的可视区域大小">
+	<input type="button" value="href">
+	<input type="button" value="search">
+	<input type="button" value="hash">
+	<script>
+		var aBtn = document.getElementsByTagName("input");
+		var opener;
+		aBtn[0].onclick = function () {
+			alert(location)
+		}
+
+		aBtn[1].onclick = function () {
+			alert(location.href) //和location一样
+		}
+
+		aBtn[2].onclick = function () {
+			alert(location.search) //找不到返回空
+		}
+
+		aBtn[3].onclick = function () {
+			alert(location.hash) //找不到返回空
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function() {
+	
+	var oDiv = document.getElementById('div1');
+	var oBtn = document.getElementById('btn');
+	var oP = document.getElementById('p1');
+	
+	oBtn.onclick = function() {
+		
+		/*
+			父级.replaceChild(新节点，被替换节点) 替换子节点
+		*/
+		//document.body.replaceChild( oDiv, oP );
+		
+		/*
+			appendChild,insertBefore,replaceChild都可以操作动态创建出来的节点，也可以操作已有节点
+		*/
+		//oP.appendChild( oDiv );
+		
+	}
+	
+}
+</script>
+</head>
+
+<body>
+	<div id="div1">div1</div>
+    <input type="button" value="按钮" id="btn" />
+    <hr />
+    <p id="p1">ppppp</p>
+</body>
+</html>

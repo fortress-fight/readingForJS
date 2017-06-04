@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			height: 2000px;
+		}
+	</style>
+</head>
+<body>
+	<script src="EventUtil.js"></script>
+	<script>
+		EventUtil.addHandler(document, 'mousewheel', getFlag);
+		
+
+		function getFlag (ev) {
+			ev = EventUtil.getEvent(ev);
+			var b = EventUtil.getScrollDetail(ev);
+			console.log(b)
+		}
+	</script>
+</body>
+</html>

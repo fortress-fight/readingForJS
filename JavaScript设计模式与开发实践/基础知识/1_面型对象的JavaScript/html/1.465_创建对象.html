@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var create = function (name) {
+			this.name = name;
+		}
+		create.prototype.sayName = function(){
+			console.log(this.name)
+		};
+		function createObj () {
+			var obj = new Object;
+			Constructor = [].shift.call(arguments);
+			obj.__proto__ = Constructor.prototype;
+			var ret = Constructor.apply(obj, arguments);
+
+			return typeof ret === 'object' ? ret : obj;
+		}
+
+		var a = createObj(create, 'xiao')
+		a.sayName() //xiao
+	</script>
+</body>
+</html>

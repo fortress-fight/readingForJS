@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		Function.prototype.uncurrying = function () {
+			var _this = this;
+			return function () {
+				console.log(arguments) // [Arguments[4], 9]
+				return Function.prototype.call.apply(_this, arguments);
+			}
+		}
+		Function.prototype.call = function () {
+			console.log(arguments) // [Arguments[4], 9]
+		}
+
+		var push = Array.prototype.push.uncurrying();
+
+
+		;(function(){
+			push(arguments, 9);
+		})(1,2,3,4);
+	</script>
+</body>
+</html>

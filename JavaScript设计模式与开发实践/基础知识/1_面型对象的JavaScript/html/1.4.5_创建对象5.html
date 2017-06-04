@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var obj = {name: 'seven'}
+		function A () {}
+		A.prototype = obj;
+
+		function B () {}
+		B.prototype = A.prototype;
+
+		B.prototype.name = 'xiao'
+
+		var a = new B();
+		alert(a.name) // xiao
+
+		var b = new A();
+		alert(b.name) // xiao
+	</script>
+</body>
+</html>

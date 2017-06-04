@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var singleton = function () {
+            var arr = [1,2,3];
+
+            return {
+                getLength: function () {
+                    return arr.length;
+                },
+
+                addData: function (data) {
+                    arr.push(data)
+                    console.log(arr);
+                }
+            }
+        }
+
+        var singletonMethods = singleton();
+        console.log(singletonMethods.getLength()); //3
+        singletonMethods.addData('hou') //[1, 2, 3, "hou"]
+    </script>
+</body>
+</html>

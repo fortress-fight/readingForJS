@@ -1,0 +1,6 @@
+﻿1.课上留言板加强
+	最多只能添加5（自己定）条，最先留的言会被清除
+2.为留言添加批量删除
+	可以点击选择单个留言，点击批量删除按钮，可以删除被选中的留言内容
+3.getElementsByClassName增强
+	getElementsByClassName(obj, tagname, 'box,box1')

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body {
+			height: 2000px;
+		}
+	</style>
+</head>
+<body>
+	<script src="EventUtil.js"></script>
+	<script>
+		document.onmousedown = function (event) {
+			var ev = EventUtil.getEvent(event);
+			var b = EventUtil.getPageX(ev);
+			var B = EventUtil.getPageY(ev);
+			var btn = EventUtil.getButton(ev);
+			console.log(btn)
+		}
+	</script>
+</body>
+</html>

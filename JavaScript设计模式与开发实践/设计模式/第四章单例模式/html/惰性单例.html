@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="loginBtn">登录</button>
+	<script>
+		var createLoginLayout = (function () {
+			var div;
+			return function () {
+				if (!div) {
+					div = document.createElement('div');
+					div.innerHTML = '登录';
+					div.style.display = 'none';
+					document.body.appendChild(div);
+				}
+				return div;
+			}
+		})()
+
+		loginBtn.onclick = function () {
+			var loginLayout = createLoginLayout();
+			loginLayout.style.display = 'block';
+
+		}
+	</script>
+</body>
+</html>

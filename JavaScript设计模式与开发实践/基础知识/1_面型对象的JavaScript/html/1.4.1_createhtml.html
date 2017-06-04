@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var a = [1,2,4];
+		var b = Object.create (a);
+		console.log(b)
+		/*
+		Array[4]3: 5length: 4__proto__: Array[3]
+		这一个就很奇怪了，push的5存在于自身上3:5，而其他的值使用过原型链找到的；
+		看来是根据下标和值，在b上添加的
+		 */
+		b.push(5);
+		alert(b) // 1245
+		alert(a) // 124
+		Object.create =  Object.create || function (obj) {
+	        var F = function () {}
+	        F.prototype = obj;
+	        return new F();
+	    }
+	</script>
+</body>
+</html>

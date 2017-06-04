@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="loginBtn">登录</button>
+	<script>
+		// 职责：检测
+		var getSingle = function (fn) {
+			var result;
+			return function () {
+				return result || (result = fn.apply(this, arguments))
+			}
+		};
+
+		// 职责：创建
+		var createLoginLayer = function () {
+			var div = document.createElement('div');
+			div.innerHTML = '登录';
+			div.style.display = 'none';
+			document.body.appendChild(div);
+			return div;
+		}
+
+		var createFrame = function () {
+			var frame = document.createElement('iframe');
+			document.body.appendChild(frame);
+			return frame
+		}
+
+		var createSingleLogin = getSingle(createLoginLayer);
+		var createFrame = getSingle(createFrame);
+
+		console.log(createSingleLogin)
+
+		document.onclick = function () {
+			var login = createSingleLogin();
+			login.style.display = 'block';
+			var fram = createFrame();
+			fram.src = '//baidu.com'
+		}
+	</script>
+</body>
+</html>

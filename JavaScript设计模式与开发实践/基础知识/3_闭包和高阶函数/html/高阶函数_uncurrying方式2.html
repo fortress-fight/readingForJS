@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		Function.prototype.uncurrying = function () {
+			var _this = this;
+			return function () {
+				return Function.prototype.call.apply(_this, arguments);
+			}
+		}
+		/*for (var i = 0 , type, arr = ['push', 'shift', 'forEach' ]; type = arr[i++];) {
+			Array[type] = Array.prototype[type].uncurrying();
+		}
+
+		;(function(){
+			Array.push(arguments, 9);
+			console.log(arguments);
+		})(1,2,3,4);
+*/
+
+		var push = Array.prototype.push .uncurrying();
+
+		;(function(){
+			push(arguments, 9);
+			console.log(arguments);
+		})(1,2,3,4);
+	</script>
+</body>
+</html>

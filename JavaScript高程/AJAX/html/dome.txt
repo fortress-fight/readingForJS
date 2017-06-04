@@ -1,0 +1,3 @@
+this is a ajax test
+
+这是个测试文件

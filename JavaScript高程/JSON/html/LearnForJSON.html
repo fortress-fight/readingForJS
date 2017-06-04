@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var book = {
+			"title": "a book",
+			"authors": "小米",
+			"edition": 4,
+			"year": 2011
+		}
+/*
+		var JSONText = JSON.stringify(book, ['title',"edition"])
+		console.log(JSONText) //{"title":"a book","edition":4}*/
+
+		var JSONText = JSON.stringify(book, function (key, value) {
+			switch (key) {
+				case 'title':
+					return '这是一个标题';
+					break;
+				case 'edition':
+					return undefined;
+					break;
+				default:
+					return value;
+					break;
+			}
+		})
+
+		console.log(JSONText) //{"title":"这是一个标题","authors":"小米","year":2011}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Person (name) {
+			this.name = name;
+		};
+		Person.prototype.job = "s";
+		Person.prototype.sayName = function(){
+			alert(this.name)
+		};
+		var person1 = new Person('小明');
+		var person2 = new Person('小白');
+
+		/*person1.sayName(); // 小明
+		person2.sayName() // 小白*/
+
+		/*alert(Person.prototype.isPrototypeOf(person1)); //true
+		alert(Person.prototype.isPrototypeOf(person2)); //true*/
+
+		/*console.log(Object.getPrototypeOf(person1)) // Object
+
+		alert(Object.getPrototypeOf(person1) == Person.prototype) // true*/
+
+		alert(person1.hasOwnProperty('sayName')) // false
+
+		person1.sayName = function () {
+			alert(1)
+		}
+		alert(person1.hasOwnProperty('sayName')) // true
+
+
+	</script>
+</body>
+</html>

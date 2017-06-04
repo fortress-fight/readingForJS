@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        document.documentElement.addEventListener('click', take1);
+        function take1(){
+            alert (1)
+        }
+        document.documentElement.addEventListener('click', take2);
+        function take2(){
+            alert (2)
+        }
+        document.documentElement.addEventListener('click', take3);
+        function take3(){
+            alert (3)
+        }
+        document.documentElement.removeEventListener('click' , take1)
+
+    </script>
+</body>
+</html>

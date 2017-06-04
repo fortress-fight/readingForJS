@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function person () {
+			this.name = '小白',
+			this.sayName = function () {
+				alert(this.name)
+			}
+		}
+		var a = new person;
+		a.sayName(); // 小白
+	</script>
+</body>
+</html>

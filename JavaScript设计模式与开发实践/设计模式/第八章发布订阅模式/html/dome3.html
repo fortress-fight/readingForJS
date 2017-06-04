@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var salesOffices = {}; // 定义发布者
+        salesOffices.clientList = {}; // 定义缓存列表
+
+        salesOffices.listen = function(key, fn){
+            if (!this.clientList[key]) {
+                this.clientList[key] = [];
+            };
+            this.clientList[key].push(fn);
+        }; // 这里以对象的形式存储，订阅者信息
+
+        salesOffices.trigger = function () {
+            var key =  Array.prototype.shift.call(arguments);
+                fns = salesOffices.clientList[key];
+            if (!fns || fns.length === 0) {
+                return false;
+            };
+            for (var i = 0, fn; fn = fns[i++];) {
+                fn.apply(this, arguments);
+            }
+        } // 这里是按照订阅者的要求（key）发送信息
+
+        // ----------------测试
+
+        salesOffices.listen('价格5000', function xiaoming(squareMeter){
+            console.log('面积' + squareMeter);
+        })
+
+        salesOffices.listen('价格3000', function xiaohong(squareMeter) {
+            console.log('面积'+squareMeter);
+        })
+
+        salesOffices.trigger('价格5000', 88); // 小明接收到 面积88
+        salesOffices.trigger('价格3000', 60); // 小红接收到 面积60
+
+    </script>
+</body>
+</html>

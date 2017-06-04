@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+#div1 {width: 100px; height: 200px; background: red; position: absolute; left: -100px; top: 100px;}
+#div2 {width: 30px; height: 60px; position: absolute; right: -30px; top: 70px; background: black; color: white; text-align: center;}
+</style>
+<script>
+window.onload = function() {
+
+	var oDiv = document.getElementById('div1');
+
+	oDiv.onmouseover = function() {
+		this.style.left = '0px';
+	}
+
+	oDiv.onmouseout = function() {
+		this.style.left = '-100px';
+	}
+
+}
+</script>
+</head>
+
+<body>
+	<div id="div1">
+    	<div id="div2">分享到</div>
+    </div>
+</body>
+</html>

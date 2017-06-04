@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function CreatePerson (name) {
+			this.name = name;
+			this.showName = new Function (alert(this.name));
+		}
+		var person1 = new CreatePerson('小白');
+		person1.showName(); // 小白
+
+		var person2 = new CreatePerson('小黑');
+		person2.showName() // 小黑
+/*
+两次创建实例的时候，就创建了两个function的实例
+ */
+
+		console.log("address")
+	</script>
+</body>
+</html>

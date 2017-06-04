@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var a = [];
+		var b = {};
+		alert(Object.getPrototypeOf(a) === Array.prototype) // true
+		alert(Object.getPrototypeOf(Array) === Function.prototype) // true
+		alert(Object.getPrototypeOf(Function) === Function.prototype) // true
+		alert(Function instanceof Object) // true
+		alert(Object.getPrototypeOf(b) === Object.prototype) // true
+	</script>
+</body>
+</html>

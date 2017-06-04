@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src = 'jquery-3.1.1.js'></script>
+</head>
+<body>
+	<ul>
+		<li class="attr" title="第一个">这里是第1个</li>
+		<li>这里是第2个</li>
+		<li>这里是第3个</li>
+		<li>这里是第4个</li>
+		<li>这里是第5个</li>
+		<li>这里是第6个</li>
+		<li>这里是第7个</li>
+		<li>这里是第8个</li>
+		<li>这里是第9个</li>
+		<li>这里是第10个</li>
+	</ul>
+	<div>
+		<span class="attr" title="第一个">这里是第1个</span>
+		<span>这里是第2个</span>
+		<span>这里是第3个</span>
+		<span>这里是第4个</span>
+		<span>这里是第5个</span>
+		<span>这里是第6个</span>
+		<span>这里是第7个</span>
+		<span>这里是第8个</span>
+		<span>这里是第9个</span>
+		<span>这里是第10个</span>
+	</div>
+	<input type="text" value="abc">
+	<script>
+		console.log($('ul li:eq(0)').attr('title')); // 第一个;
+		$('ul li:eq(0)').attr('title', 'attr'); // attr;
+
+		/*var $p = $('<p class="attrNode">' + $('ul li:eq(0)').attr('title'));
+		$p.appendTo($('ul li:eq(0)'));
+
+		$('ul li:odd').after($('<span>after</span>'));
+
+		$('ul li:first').remove();
+		var b = $('li').length;
+		// alert(b)*/
+
+		// $('ul li').remove('li[class=attr]')
+
+		// $('ul li').detach('li[class=attr]')
+		// alert($('li').length)
+
+		// $('ul li:last-child').empty();
+
+		// $('div span').replaceWith('<strong>这里是替换后</strong>')
+		// $('<strong>这里是替换后</strong>').replaceAll('div span');
+
+		// $('div span').wrap('<p></p>');
+		// $('div span').wrapAll('<p></p>');
+		// $('div span').wrapInner('<strong></strong>')
+
+		// $('ul').click(function () {
+		// 	$('div').toggle()
+		// })
+
+		/*$('ul').click(function () {
+			$('div').toggle(function () {
+				alert('fn1')
+			}, function () {
+				alert('fn2')
+			})
+		})
+
+		var a = document.getElementsByTagName('input')[0];
+		alert(a.defaultValue);*/
+
+		/*$(document).click(function (ev) {
+			$(ev.target).closest('li').css('background', 'red')
+		})*/
+
+		// $('ul').append($('<li>这里是添加进去的</li>'))
+		$('ul').html($('ul').html() + '<li>这里是添加进去的')
+		$('ul').html($('ul').html() + '<p>asdfsadfasd')
+
+	</script>
+</body>
+</html>
